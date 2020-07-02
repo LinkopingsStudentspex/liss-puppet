@@ -1,0 +1,12 @@
+.login-pf body {
+    background: #e9f8ff
+}
+
+div#kc-header-wrapper {
+    background: url('../img/lisse.png') no-repeat center center;
+    background-size: 218px 118px;
+    color: #10508c;
+    height: 170px;
+    margin: 0 auto;
+    padding-top: 160px;
+}

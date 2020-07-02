@@ -1,0 +1,14 @@
+organization_domain: lisstest4.internal.karlinde.se
+smtp_host: smtp.eu.mailgun.org
+smtp_user: postmaster@dev.studentspex.se
+smtp_port: 465
+
+nginx::server_purge: true
+
+keycloak::version: '9.0.2'
+
+keycloak_liss::batadas_userlookup_url: http://internt.%{organization_domain}/batadasen/api
+keycloak_liss::domain: konto.%{organization_domain}
+
+internsidor::domain: internt.%{organization_domain}
+internsidor::keycloak_auth_url: http://%{keycloak_liss::domain}/auth

@@ -1,0 +1,27 @@
+forge 'https://forge.puppet.com'
+
+mod 'puppet-nginx', '1.1.0'
+mod 'puppetlabs-stdlib', '6.3.0'
+mod 'puppetlabs-concat', '6.2.0'
+mod 'puppetlabs-translate', '2.2.0'
+mod 'puppetlabs-apt', '7.4.2'
+
+mod 'treydock-keycloak', '6.10.0'
+mod 'camptocamp-systemd', '2.9.0'
+mod 'puppetlabs-inifile', '4.2.0'
+mod 'puppet-archive', '4.5.0'
+mod 'puppetlabs-java', '6.3.0'
+mod 'puppetlabs-postgresql', '6.6.0'
+mod 'puppet-python', '4.1.1'
+mod 'puppetlabs-vcsrepo', '3.1.1'
+mod 'pltraining-dirtree', '0.3.0'
+
+mod 'internsidor', :local => true
+mod 'keycloak_liss', :local => true
+
+# These are not really used, just needed to silence the dependency warnings...
+mod 'puppetlabs-mysql', '10.6.0'
+mod 'puppetlabs-resource_api', '1.1.0'
+mod 'puppetlabs-puppetserver_gem', '1.1.1'
+mod 'puppetlabs-java_ks', '3.2.0'
+mod 'puppet-epel', '3.0.1'

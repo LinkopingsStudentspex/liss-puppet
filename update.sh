@@ -1,0 +1,1 @@
+r10k puppetfile install && puppet apply manifests/site.pp --modulepath=modules:site-modules

@@ -1,0 +1,16 @@
+[Unit]
+Description = Internsidorna via Gunicorn
+After = network.target
+
+[Service]
+PermissionsStartOnly = true
+PIDFile = /run/internsidor_gunicorn/internsidor_gunicorn.pid
+User = www-data
+Group = www-data
+WorkingDirectory = <%= $internsidor::project_path %>
+ExecStart = <%= $internsidor::venv_path %>/bin/gunicorn internsidor.wsgi -b 0.0.0.0:<%= $internsidor::gunicorn_port %> --pid /run/internsidor_gunicorn/internsidor_gunicorn.pid --workers=3
+ExecReload = /bin/kill -s HUP $MAINPID
+PrivateTmp = true
+
+[Install]
+WantedBy = multi-user.target
