@@ -10,6 +10,7 @@ keycloak::version: '9.0.2'
 keycloak::datasource_driver: postgresql
 keycloak::datasource_dbname: keycloak
 keycloak::datasource_username: keycloak
+keycloak::proxy_https: true
 
 keycloak_liss::batadas_userlookup_url: http://internt.%{organization_domain}/batadasen/api
 keycloak_liss::domain: konto.%{organization_domain}

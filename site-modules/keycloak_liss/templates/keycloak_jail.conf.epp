@@ -1,0 +1,8 @@
+[keycloak]
+enabled  = true
+filter   = keycloak
+port = http,https
+maxretry = <%= $keycloak_liss::fail2ban_maxretry %>
+findtime = <%= $keycloak_liss::fail2ban_findtime %>
+bantime = <%= $keycloak_liss::fail2ban_bantime %>
+backend  = systemd

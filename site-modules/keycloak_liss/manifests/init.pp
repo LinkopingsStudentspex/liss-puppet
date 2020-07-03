@@ -1,12 +1,15 @@
 # Konfigurerar och installerar Keycloak
 class keycloak_liss (
+  $batadas_userlookup_url = '',
   $domain = '',
   $email_from_addr = "root@${::organization_domain}",
   $email_from_name = 'Spexets internsidor',
+  $fail2ban_bantime = 600,
+  $fail2ban_findtime = 600,
+  $fail2ban_maxretry = 5,
   $smtp_auth = true,
   $smtp_ssl = true,
   $smtp_starttls = true,
-  $batadas_userlookup_url = ''
 ){
   include keycloak
   keycloak_realm { 'liss':
@@ -56,5 +59,19 @@ class keycloak_liss (
     add_header => {
       'X-Frame-Options' => 'SAMEORIGIN',
     },
+  }
+
+  file {'/etc/fail2ban/filter.d/keycloak.conf':
+    ensure  => file,
+    source  => 'puppet:///modules/keycloak_liss/fail2ban/keycloak_filter.conf',
+    notify  => Service['fail2ban'],
+    require => Package['fail2ban'],
+  }
+
+  file {'/etc/fail2ban/jail.d/keycloak.conf':
+    ensure  => file,
+    content => epp('keycloak_liss/keycloak_jail.conf.epp'),
+    notify  => Service['fail2ban'],
+    require => Package['fail2ban'],
   }
 }
