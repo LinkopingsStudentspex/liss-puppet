@@ -1,19 +1,26 @@
 # Konfiguration och installation av Django-sidan
 class internsidor (
-  $admin_email         = "root@${::organization_domain}",
-  $django_db_name      = 'django',
-  $django_db_pass = '',
-  $django_db_user      = 'django',
-  $django_secret_key = '',
-  $domain = '',
-  $oidc_clientid       = 'internsidor',
-  $oidc_clientsecret = '',
-  $project_path        = '/opt/internsidor/src',
-  $static_files_path   = '/var/www/internsidor/static',
-  $venv_path           = '/opt/internsidor/venv',
+  $admin_email           = "root@${::organization_domain}",
+  $django_db_name        = 'django',
+  $django_db_pass        = '',
+  $django_db_user        = 'django',
+  $django_secret_key     = '',
+  $domain                = '',
+  $oidc_clientid         = 'internsidor',
+  $oidc_clientsecret     = '',
+  $project_path          = '/opt/internsidor/src',
+  $static_files_path     = '/var/www/internsidor/static',
+  $venv_path             = '/opt/internsidor/venv',
+  $milter_port           = undef,
+  $recipient_lookup_port = undef,
 ) {
   include nginx
   include postgresql::server
+
+  # To avoid collision with nginx. Why was this even installed?
+  package {'apache2':
+    ensure => absent,
+  }
 
   postgresql::server::db {$django_db_name:
     user     => $django_db_user,
@@ -140,5 +147,29 @@ class internsidor (
     location_alias => "${static_files_path}/",
     server         => $domain,
     index_files    =>  [],
+  }
+
+  file {'/etc/systemd/system/lissmilter.service':
+    ensure  => file,
+    content => epp('internsidor/lissmilter.service.epp'),
+  }
+
+  service {'lissmilter':
+    ensure    => running,
+    enable    => true,
+    require   => Vcsrepo[$project_path],
+    subscribe => File['/etc/systemd/system/lissmilter.service'],
+  }
+
+  file {'/etc/systemd/system/recipient-lookup.service':
+    ensure  => file,
+    content => epp('internsidor/recipient-lookup.service.epp'),
+  }
+
+  service {'recipient-lookup':
+    ensure    => running,
+    enable    => true,
+    require   => Vcsrepo[$project_path],
+    subscribe => File['/etc/systemd/system/recipient-lookup.service'],
   }
 }

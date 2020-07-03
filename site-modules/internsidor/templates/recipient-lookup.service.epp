@@ -1,0 +1,13 @@
+[Unit]
+Description = Lookup av mottagare för e-postlistor
+After = network.target
+
+[Service]
+Type = simple
+User = nobody
+Group = nogroup
+WorkingDirectory = <%= $internsidor::project_path %>
+ExecStart = <%= $internsidor::venv_path %>/bin/python -u postfix_daemon.py <%= $internsidor::recipient_lookup_port %>
+
+[Install]
+WantedBy = multi-user.target

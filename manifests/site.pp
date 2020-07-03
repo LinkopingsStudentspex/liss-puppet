@@ -9,4 +9,9 @@ node default {
   include internsidor
   include keycloak_liss
   include mediawiki
+  include postfix
+
+  include firewalld
+
+  firewalld_service { ['ssh', 'http']: }
 }

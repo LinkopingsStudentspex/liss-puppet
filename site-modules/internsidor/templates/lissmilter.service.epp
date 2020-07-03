@@ -1,0 +1,13 @@
+[Unit]
+Description = Milter (mailfilter) för LiSS
+After = network.target
+
+[Service]
+Type = simple
+User = nobody
+Group = nogroup
+WorkingDirectory = <%= $internsidor::project_path %>
+ExecStart = <%= $internsidor::venv_path %>/bin/python -u lissmilter.py inet:<%= $internsidor::milter_port %> <%= $::organization_domain %>
+
+[Install]
+WantedBy = multi-user.target

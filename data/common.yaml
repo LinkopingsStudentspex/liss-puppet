@@ -15,6 +15,8 @@ keycloak_liss::batadas_userlookup_url: http://internt.%{organization_domain}/bat
 keycloak_liss::domain: konto.%{organization_domain}
 
 internsidor::domain: internt.%{organization_domain}
+internsidor::milter_port: 8082
+internsidor::recipient_lookup_port: 9999
 
 mysql::server::remove_default_accounts: true
 
@@ -22,3 +24,26 @@ mediawiki::domain: wiki.%{organization_domain}
 mediawiki::baseurl: http://%{lookup('mediawiki::domain')}
 mediawiki::version_major_minor: '1.34'
 mediawiki::version_patch: '2'
+
+postfix::parameters:
+    myorigin: "%{organization_domain}"
+    mydestination: "$myhostname localhost %{organization_domain}"
+    smtpd_relay_restrictions: permit_mynetworks defer
+    mynetworks:
+        comments:
+            - Allow mail from SUNET email filters
+        value: 127.0.0.0/8 192.36.171.200/29 89.45.235.0/28 2001:6b0:8:2::/64 2001:6b0:5a:4019::/64
+
+    smtpd_milters:
+        comments:
+            - Milter that checks for authorized senders to protected lists and rewrites some subject headers
+        value: inet:localhost:%{lookup('internsidor::milter_port')}
+
+    virtual_alias_maps:
+        comments:
+            - Connects to a daemon that performs a lookup against the database of email lists recipients
+        value: socketmap:inet:localhost:%{lookup('internsidor::recipient_lookup_port')}:virtual
+
+    relayhost: "%{smtp_host}:%{smtp_port}"
+    smtp_sasl_auth_enable: yes
+    smtp_sasl_security_options: noanonymous

@@ -1,9 +1,11 @@
 forge 'https://forge.puppet.com'
 
 mod 'camptocamp-systemd', '2.9.0'
+mod 'cirrax-postfix', '2.0.3'
 mod 'pltraining-dirtree', '0.3.0'
 mod 'puppet-archive', '4.5.0'
 mod 'puppet-epel', '3.0.1'
+mod 'puppet-firewalld', '4.3.0'
 mod 'puppet-nginx', '1.1.0'
 mod 'puppet-php', '7.1.0'
 mod 'puppet-python', '4.1.1'
