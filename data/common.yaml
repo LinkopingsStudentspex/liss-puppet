@@ -7,6 +7,9 @@ keycloak_auth_url: http://%{lookup('keycloak_liss::domain')}/auth
 nginx::server_purge: true
 
 keycloak::version: '9.0.2'
+keycloak::datasource_driver: postgresql
+keycloak::datasource_dbname: keycloak
+keycloak::datasource_username: keycloak
 
 keycloak_liss::batadas_userlookup_url: http://internt.%{organization_domain}/batadasen/api
 keycloak_liss::domain: konto.%{organization_domain}
