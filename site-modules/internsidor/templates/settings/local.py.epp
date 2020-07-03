@@ -4,11 +4,11 @@
 OIDC_RP_CLIENT_ID = '<%= $internsidor::oidc_clientid %>'
 OIDC_RP_CLIENT_SECRET = '<%= $internsidor::oidc_clientsecret %>'
 
-OIDC_OP_AUTHORIZATION_ENDPOINT = '<%= $internsidor::keycloak_auth_url %>/realms/liss/protocol/openid-connect/auth'
-OIDC_OP_TOKEN_ENDPOINT =         '<%= $internsidor::keycloak_auth_url %>/realms/liss/protocol/openid-connect/token'
-OIDC_OP_USER_ENDPOINT =          '<%= $internsidor::keycloak_auth_url %>/realms/liss/protocol/openid-connect/userinfo'
-OIDC_OP_JWKS_ENDPOINT =          '<%= $internsidor::keycloak_auth_url %>/realms/liss/protocol/openid-connect/certs'
-OIDC_OP_LOGOUT_ENDPOINT =        '<%= $internsidor::keycloak_auth_url %>/realms/liss/protocol/openid-connect/logout'
+OIDC_OP_AUTHORIZATION_ENDPOINT = '<%= $::keycloak_auth_url %>/realms/liss/protocol/openid-connect/auth'
+OIDC_OP_TOKEN_ENDPOINT =         '<%= $::keycloak_auth_url %>/realms/liss/protocol/openid-connect/token'
+OIDC_OP_USER_ENDPOINT =          '<%= $::keycloak_auth_url %>/realms/liss/protocol/openid-connect/userinfo'
+OIDC_OP_JWKS_ENDPOINT =          '<%= $::keycloak_auth_url %>/realms/liss/protocol/openid-connect/certs'
+OIDC_OP_LOGOUT_ENDPOINT =        '<%= $::keycloak_auth_url %>/realms/liss/protocol/openid-connect/logout'
 
 EMAIL_HOST = '<%= $::smtp_host %>'
 EMAIL_PORT = '<%= $::smtp_port %>'

@@ -2,6 +2,7 @@ organization_domain: lisstest4.internal.karlinde.se
 smtp_host: smtp.eu.mailgun.org
 smtp_user: postmaster@dev.studentspex.se
 smtp_port: 465
+keycloak_auth_url: http://%{lookup('keycloak_liss::domain')}/auth
 
 nginx::server_purge: true
 
@@ -11,4 +12,10 @@ keycloak_liss::batadas_userlookup_url: http://internt.%{organization_domain}/bat
 keycloak_liss::domain: konto.%{organization_domain}
 
 internsidor::domain: internt.%{organization_domain}
-internsidor::keycloak_auth_url: http://%{keycloak_liss::domain}/auth
+
+mysql::server::remove_default_accounts: true
+
+mediawiki::domain: wiki.%{organization_domain}
+mediawiki::baseurl: http://%{lookup('mediawiki::domain')}
+mediawiki::version_major_minor: '1.34'
+mediawiki::version_patch: '2'

@@ -6,7 +6,6 @@ class internsidor (
   $django_db_user      = 'django',
   $django_secret_key = '',
   $domain = '',
-  $keycloak_auth_url = '',
   $oidc_clientid       = 'internsidor',
   $oidc_clientsecret = '',
   $project_path        = '/opt/internsidor/src',
@@ -125,9 +124,9 @@ class internsidor (
   service {'internsidor-gunicorn':
     ensure    => running,
     enable    => true,
-    require   => [
-      Python::Requirements["${project_path}/requirements-prod.txt"],
-      Python::Requirements["${project_path}/requirements.txt"]
+    require   => Python::Requirements[
+      "${project_path}/requirements-prod.txt",
+      "${project_path}/requirements.txt",
     ],
     subscribe => File['/etc/systemd/system/internsidor-gunicorn.service'],
   }
