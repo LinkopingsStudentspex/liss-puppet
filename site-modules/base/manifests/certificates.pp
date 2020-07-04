@@ -1,7 +1,7 @@
 # SSL certificates for all domains via letsencrypt
 class base::certificates {
   include letsencrypt
-  letsencrypt::certonly {'sites':
+  letsencrypt::certonly {'all-sites':
     domains              => [
       lookup('keycloak_liss::domain'),
       lookup('internsidor::domain'),

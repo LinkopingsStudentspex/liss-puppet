@@ -150,8 +150,8 @@ class mediawiki (
     require      => Class['::base::certificates'],
     ssl_redirect => true,
     ssl          => true,
-    ssl_cert     => "/etc/letsencrypt/live/${domain}/fullchain.pem",
-    ssl_key      => "/etc/letsencrypt/live/${domain}/privkey.pem",
+    ssl_cert     => '/etc/letsencrypt/live/all-sites/fullchain.pem',
+    ssl_key      => '/etc/letsencrypt/live/all-sites/privkey.pem',
   }
 
   nginx::resource::location{'mediawiki':

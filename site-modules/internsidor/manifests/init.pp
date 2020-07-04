@@ -150,8 +150,8 @@ class internsidor (
     require          => Class['::base::certificates'],
     ssl_redirect     => true,
     ssl              => true,
-    ssl_cert         => "/etc/letsencrypt/live/${domain}/fullchain.pem",
-    ssl_key          => "/etc/letsencrypt/live/${domain}/privkey.pem",
+    ssl_cert         => '/etc/letsencrypt/live/all-sites/fullchain.pem',
+    ssl_key          => '/etc/letsencrypt/live/all-sites/privkey.pem',
     proxy_set_header => [
       'X-Forwarded-Proto $scheme',
       'X-Forwarded-Host $host',
