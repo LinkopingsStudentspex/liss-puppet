@@ -33,7 +33,7 @@ postfix::parameters:
     mynetworks:
         comments:
             - Allow mail from SUNET email filters
-        value: 127.0.0.0/8 192.36.171.200/29 89.45.235.0/28 2001:6b0:8:2::/64 2001:6b0:5a:4019::/64
+        value: 127.0.0.0/8 192.36.171.200/29 89.45.235.0/28 [2001:6b0:8:2::]/64 [2001:6b0:5a:4019::]/64
 
     smtpd_milters:
         comments:
@@ -50,3 +50,5 @@ postfix::parameters:
     smtp_sasl_security_options: noanonymous
     smtp_tls_security_level: encrypt
     smtp_tls_wrappermode: 'yes'
+
+letsencrypt::email: root@dev.studentspex.se
