@@ -1,4 +1,4 @@
-organization_domain: lisstest4.internal.karlinde.se
+organization_domain: dev.studentspex.se
 smtp_host: smtp.eu.mailgun.org
 smtp_user: postmaster@dev.studentspex.se
 smtp_port: 465
