@@ -57,6 +57,10 @@ class internsidor (
     cwd         => $project_path,
     user        => 'www-data',
     refreshonly => true,
+    require     => Python::Requirements[
+      "${project_path}/requirements-prod.txt",
+      "${project_path}/requirements.txt",
+    ],
   }
 
   python::virtualenv { $venv_path:
