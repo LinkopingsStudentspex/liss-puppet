@@ -1,7 +1,7 @@
 # Baskonfiguration för servern
 class base {
+  include unattended_upgrades
   include firewalld
-  firewalld_service { ['ssh', 'http', 'https', 'smtp']: }
 
   package {'fail2ban':}
 

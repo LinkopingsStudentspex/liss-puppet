@@ -53,3 +53,18 @@ postfix::parameters:
     smtp_tls_wrappermode: 'yes'
 
 letsencrypt::email: root@dev.studentspex.se
+
+unattended_upgrades::auto:
+    reboot: true
+    reboot_time: '04:41'
+unattended_upgrades::mail:
+    only_on_error: true
+    to: root@dev.studentspex.se
+unattended_upgrades::verbose: true
+
+# Configure the firewall
+firewalld::services:
+    http: {}
+    https: {}
+    ssh: {}
+    smtp: {}
