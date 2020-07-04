@@ -145,8 +145,13 @@ class mediawiki (
   include php::fpm
 
   nginx::resource::server { $domain:
-    www_root    => '/var/www/mediawiki/',
-    index_files => ['index.php'],
+    www_root     => '/var/www/mediawiki/',
+    index_files  => ['index.php'],
+    require      => Class['::base::certificates'],
+    ssl_redirect => true,
+    ssl          => true,
+    ssl_cert     => "/etc/letsencrypt/live/${domain}/fullchain.pem",
+    ssl_key      => "/etc/letsencrypt/live/${domain}/privkey.pem",
   }
 
   nginx::resource::location{'mediawiki':

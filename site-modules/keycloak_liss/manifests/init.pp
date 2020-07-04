@@ -55,10 +55,21 @@ class keycloak_liss (
   }
 
   nginx::resource::server { $domain :
-    proxy      => 'http://localhost:8080',
-    add_header => {
+    proxy            => 'http://localhost:8080',
+    add_header       => {
       'X-Frame-Options' => 'SAMEORIGIN',
     },
+    require          => Class['::base::certificates'],
+    ssl_redirect     => true,
+    ssl              => true,
+    ssl_cert         => "/etc/letsencrypt/live/${domain}/fullchain.pem",
+    ssl_key          => "/etc/letsencrypt/live/${domain}/privkey.pem",
+    proxy_set_header => [
+      'X-Forwarded-Proto $scheme',
+      'X-Forwarded-Host $host',
+      'X-Forwarded-Server $host',
+      'X-Forwarded-for $proxy_add_x_forwarded_for',
+    ],
   }
 
   file {'/etc/fail2ban/filter.d/keycloak.conf':

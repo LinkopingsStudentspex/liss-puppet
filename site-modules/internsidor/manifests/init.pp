@@ -17,6 +17,7 @@ class internsidor (
   include nginx
   include postgresql::server
   include postfix
+  include base::certificates
 
   # To avoid collision with nginx. Why was this even installed?
   package {'apache2':
