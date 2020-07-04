@@ -60,7 +60,7 @@ unattended_upgrades::auto:
 unattended_upgrades::mail:
     only_on_error: true
     to: root@dev.studentspex.se
-unattended_upgrades::verbose: true
+unattended_upgrades::verbose: 1
 
 # Configure the firewall
 firewalld::services:
