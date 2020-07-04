@@ -64,7 +64,11 @@ unattended_upgrades::verbose: 1
 
 # Configure the firewall
 firewalld::services:
-    http: {}
-    https: {}
-    ssh: {}
-    smtp: {}
+    http:
+        ensure: present
+    https:
+        ensure: present
+    ssh:
+        ensure: present
+    smtp:
+        ensure: present
