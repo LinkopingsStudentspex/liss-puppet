@@ -23,7 +23,6 @@ class base {
   cron {'puppet-update':
     command => '/etc/puppet/code/puppet-update.sh',
     user    => 'root',
-    # Temporary short interval for testing
-    minute  => '*/5',
+    minute  => '16',
   }
 }
