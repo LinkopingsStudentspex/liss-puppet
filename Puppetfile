@@ -6,7 +6,12 @@ mod 'pltraining-dirtree', '0.3.0'
 mod 'puppet-archive', '4.5.0'
 mod 'puppet-epel', '3.0.1'
 mod 'puppet-firewalld', '4.3.0'
-mod 'puppet-letsencrypt', '5.0.0'
+
+# Since the latest release on forge depends on a deprecated package
+mod 'puppet-letsencrypt',
+  :git => 'https://github.com/voxpupuli/puppet-letsencrypt.git',
+  :tag => 'c16fe95a432564a3ac62eb7f56dfafb06d207218'
+
 mod 'puppet-nginx', '1.1.0'
 mod 'puppet-php', '7.1.0'
 mod 'puppet-python', '4.1.1'
