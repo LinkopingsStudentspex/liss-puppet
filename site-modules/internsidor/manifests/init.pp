@@ -16,6 +16,7 @@ class internsidor (
 ) {
   include nginx
   include postgresql::server
+  include postfix
 
   # To avoid collision with nginx. Why was this even installed?
   package {'apache2':
@@ -143,8 +144,19 @@ class internsidor (
   }
 
   nginx::resource::server { $domain:
-    proxy       => "http://localhost:${gunicorn_port}",
-    index_files =>  [],
+    proxy            => "http://localhost:${gunicorn_port}",
+    index_files      =>  [],
+    require          => Class['::base::certificates'],
+    ssl_redirect     => true,
+    ssl              => true,
+    ssl_cert         => "/etc/letsencrypt/live/${domain}/fullchain.pem",
+    ssl_key          => "/etc/letsencrypt/live/${domain}/privkey.pem",
+    proxy_set_header => [
+      'X-Forwarded-Proto $scheme',
+      'X-Forwarded-Host $host',
+      'X-Forwarded-Server $host',
+      'X-Forwarded-for $proxy_add_x_forwarded_for',
+    ],
   }
 
   nginx::resource::location{'/static/':
