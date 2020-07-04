@@ -18,6 +18,7 @@ keycloak_liss::domain: konto.%{organization_domain}
 internsidor::domain: internt.%{organization_domain}
 internsidor::milter_port: 8082
 internsidor::recipient_lookup_port: 9999
+internsidor::debug: true
 
 mysql::server::remove_default_accounts: true
 

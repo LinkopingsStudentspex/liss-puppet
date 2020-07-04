@@ -1,6 +1,7 @@
 # Konfiguration och installation av Django-sidan
 class internsidor (
   $admin_email           = "root@${::organization_domain}",
+  $debug                 = false,
   $django_db_name        = 'django',
   $django_db_pass        = '',
   $django_db_user        = 'django',
