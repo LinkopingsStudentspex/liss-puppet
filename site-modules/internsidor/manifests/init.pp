@@ -72,7 +72,7 @@ class internsidor (
   keycloak_client { $oidc_clientid:
     realm                 => 'liss',
     secret                => $oidc_clientsecret,
-    redirect_uris         => ["http://${domain}/*"],
+    redirect_uris         => ["https://${domain}/*"],
     default_client_scopes => ['profile', 'email'],
   }
 
