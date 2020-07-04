@@ -11,7 +11,7 @@ class keycloak_liss (
   $smtp_ssl = true,
   $smtp_starttls = true,
 ){
-  include keycloak
+  require keycloak
   keycloak_realm { 'liss':
     remember_me                  => true,
     login_theme                  => 'liss',
