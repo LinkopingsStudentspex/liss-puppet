@@ -26,3 +26,4 @@ mod 'treydock-keycloak', '6.10.0'
 
 mod 'internsidor', :local => true
 mod 'keycloak_liss', :local => true
+mod 'mediawiki' :local => true

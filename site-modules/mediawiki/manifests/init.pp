@@ -18,7 +18,7 @@ class mediawiki (
   $wiki_title = 'Internwiki',
 
 ) {
-  include mysql::server
+  require mysql::server
 
   mysql::db { $wiki_db_name:
     user     => $wiki_db_user,
