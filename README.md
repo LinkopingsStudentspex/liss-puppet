@@ -10,6 +10,7 @@ Inspiration har tagits från Holgerspexets puppetkonfiguration (https://github.c
 Konfigurationen är bara testat på Ubuntu 18.04. För att kunna applicera konfigurationen behöver följande paket vara installerade på systemet:
   * `puppet`
   * `r10k`
+  * `hiera-eyaml`
 
 # Användning
 ## Installation
