@@ -161,8 +161,8 @@ class mediawiki (
     server      => $domain,
     index_files => [],
     try_files   => ['$uri', '$uri/', '/index.php'],
-      ssl       => true,
-      ssl_only  => true,
+    ssl         => true,
+    ssl_only    => true,
   }
 
   nginx::resource::location{'~ \.php$':

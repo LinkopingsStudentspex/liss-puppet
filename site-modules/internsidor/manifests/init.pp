@@ -165,6 +165,8 @@ class internsidor (
     location_alias => "${static_files_path}/",
     server         => $domain,
     index_files    =>  [],
+    ssl            => true,
+    ssl_only       => true,
   }
 
   file {'/etc/systemd/system/lissmilter.service':
