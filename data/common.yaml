@@ -2,7 +2,7 @@ organization_domain: dev.studentspex.se
 smtp_host: smtp.eu.mailgun.org
 smtp_user: postmaster@dev.studentspex.se
 smtp_port: 465
-keycloak_auth_url: http://%{lookup('keycloak_liss::domain')}/auth
+keycloak_auth_url: https://%{lookup('keycloak_liss::domain')}/auth
 
 nginx::server_purge: true
 
@@ -12,7 +12,7 @@ keycloak::datasource_dbname: keycloak
 keycloak::datasource_username: keycloak
 keycloak::proxy_https: true
 
-keycloak_liss::batadas_userlookup_url: http://internt.%{organization_domain}/batadasen/api
+keycloak_liss::batadas_userlookup_url: https://internt.%{organization_domain}/batadasen/api
 keycloak_liss::domain: konto.%{organization_domain}
 
 internsidor::domain: internt.%{organization_domain}
@@ -23,7 +23,7 @@ internsidor::debug: true
 mysql::server::remove_default_accounts: true
 
 mediawiki::domain: wiki.%{organization_domain}
-mediawiki::baseurl: http://%{lookup('mediawiki::domain')}
+mediawiki::baseurl: https://%{lookup('mediawiki::domain')}
 mediawiki::version_major_minor: '1.34'
 mediawiki::version_patch: '2'
 
