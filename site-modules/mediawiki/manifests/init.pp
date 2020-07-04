@@ -12,7 +12,7 @@ class mediawiki (
   $wiki_admin_pass = '',
   $wiki_admin_user = 'admin',
   $wiki_db_host = 'localhost',
-  $wiki_db_name = 'wikdb',
+  $wiki_db_name = 'wikidb',
   $wiki_db_pass = '',
   $wiki_db_user = 'wikiuser',
   $wiki_title = 'Internwiki',
@@ -114,6 +114,7 @@ class mediawiki (
     creates => '/var/www/mediawiki/LocalSettings.php',
     path    => '/usr/bin',
     require => Package['php', 'php-mysql'],
+    before  => File['/var/www/mediawiki/LocalSettings.php'],
   }
 
   file {'/var/www/mediawiki/LocalSettings.php':
