@@ -59,6 +59,6 @@ LOGGING = {
 
 STATIC_ROOT = '<%= $internsidor::static_files_path %>/'
 
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 USE_X_FORWARDED_HOST = True
 
