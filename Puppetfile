@@ -29,7 +29,7 @@ mod 'puppetlabs-resource_api', '1.1.0'
 mod 'puppetlabs-stdlib', '6.3.0'
 mod 'puppetlabs-translate', '2.2.0'
 mod 'puppetlabs-vcsrepo', '3.1.1'
-mod 'treydock-keycloak', '6.10.0'
+mod 'treydock-keycloak', '6.12.0'
 
 mod 'internsidor', :local => true
 mod 'keycloak_liss', :local => true
