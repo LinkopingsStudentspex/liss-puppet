@@ -81,6 +81,7 @@ postfix::parameters:
     smtp_sasl_security_options: noanonymous
     smtp_tls_security_level: encrypt
     smtp_tls_wrappermode: 'yes'
+    smtl_sasl_password_maps: "static:%{lookup('smtp_user')}:%{lookup('smtp_password')}"
 
 letsencrypt::email: root@dev.studentspex.se
 
