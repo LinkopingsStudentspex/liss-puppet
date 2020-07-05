@@ -2,26 +2,22 @@
 class keycloak_liss (
   $batadas_userlookup_url = '',
   $domain = '',
-  $email_from_addr = "root@${::organization_domain}",
-  $email_from_name = 'Spexets internsidor',
   $fail2ban_bantime = 600,
   $fail2ban_findtime = 600,
   $fail2ban_maxretry = 5,
-  $smtp_auth = true,
-  $smtp_ssl = true,
-  $smtp_starttls = true,
 ){
   require keycloak
-  keycloak_realm { 'liss':
-    remember_me                  => true,
-    login_theme                  => 'liss',
-    display_name                 => 'Linköpings Studentspex',
-    internationalization_enabled => true,
-    supported_locales            => ['sv', 'en'],
+
+  exec {'enable password reset for liss realm':
+    command     => '/opt/keycloak/bin/kcadm-wrapper.sh update realms/liss -x -s resetPasswordAllowed=true',
+    refreshonly => true,
+    subscribe   => Keycloak_realm['liss'],
   }
 
-  exec {'update realm':
-    command => "/opt/keycloak/bin/kcadm-wrapper.sh update realms/liss -x -s resetPasswordAllowed=true -s \"smtpServer.host=${::smtp_host}\" -s smtpServer.port=${::smtp_port} -s \"smtpServer.from=${email_from_addr}\" -s \"smtpServer.fromDisplayName=${email_from_name}\" -s \"smtpServer.auth=${smtp_auth}\" -s \"smtpServer.ssl=${smtp_ssl}\" -s \"smtpServer.starttls=${smtp_starttls}\" -s \"smtpServer.user=${::smtp_user}\" -s \"smtpServer.password=${::smtp_password}\""
+  exec {'enable password reset for master realm':
+    command     => '/opt/keycloak/bin/kcadm-wrapper.sh update realms/master -x -s resetPasswordAllowed=true',
+    refreshonly => true,
+    subscribe   => Keycloak_realm['master'],
   }
 
   file {'/opt/keycloak/bin/check_user_provider_exists.sh':
