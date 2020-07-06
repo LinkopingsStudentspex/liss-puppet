@@ -29,36 +29,36 @@ class backup (
   cron {'backup database django':
     command => "${pg_backup_script} django ${db_backup_location} ${recipient}",
     user    => 'root',
-    day     => '*',
+    weekday => '*',
     hour    => '03',
     minute  => '05',
     require => [
       File[$db_backup_location, $pg_backup_script],
-      Package['postgresql-client-common', 'gnupg'],
+      Package['gnupg'],
     ],
   }
 
   cron {'backup database keycloak':
     command => "${pg_backup_script} keycloak ${db_backup_location} ${recipient}",
     user    => 'root',
-    day     => '*',
+    weekday => '*',
     hour    => '03',
     minute  => '10',
     require => [
       File[$db_backup_location, $pg_backup_script],
-      Package['postgresql-client-common', 'gnupg'],
+      Package['gnupg'],
     ],
   }
 
   cron {'backup database wikidb':
     command => "${mysql_backup_script} wikidb ${db_backup_location} ${recipient}",
     user    => 'root',
-    day     => '*',
+    weekday => '*',
     hour    => '03',
     minute  => '15',
     require => [
       File[$db_backup_location, $mysql_backup_script],
-      Package['mysql-client', 'gnupg'],
+      Package['gnupg'],
     ],
   }
 }
