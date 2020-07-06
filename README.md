@@ -7,7 +7,7 @@ Tredjepartsmoduler från Puppet Forge deklareras i `Puppetfile` och hanteras via
 Inspiration har tagits från Holgerspexets puppetkonfiguration (https://github.com/holgerspexet/holger-puppet)
 
 ## Förutsättningar
-Konfigurationen är bara testat på Ubuntu 18.04. För att kunna applicera konfigurationen behöver följande paket vara installerade på systemet:
+Konfigurationen är bara testad på Ubuntu 18.04. För att kunna applicera konfigurationen behöver följande paket vara installerade på systemet:
   * `puppet`
   * `r10k`
   * `hiera-eyaml`
