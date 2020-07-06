@@ -19,12 +19,8 @@ define backup::encrypted_db_dump_job (
     mode   => 'a+rw',
   }
 
-  package{'gnupg':}
-
   case $provider {
     'postgres': {
-      package{'postgresql-client-common':}
-
       $script_file = '/usr/local/bin/backup_db_postgres.sh'
       file {$script_file:
         source => 'puppet:///modules/backup/backup_db_postgres.sh',
@@ -43,8 +39,6 @@ define backup::encrypted_db_dump_job (
       }
     }
     'mysql': {
-      package{['mysql-client']:}
-
       $script_file = '/usr/local/bin/backup_db_mysql.sh'
       file {$script_file:
         source => 'puppet:///modules/backup/backup_db_mysql.sh',
