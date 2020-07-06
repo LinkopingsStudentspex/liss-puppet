@@ -7,6 +7,7 @@ $keycloak_auth_url = lookup('keycloak_auth_url')
 
 node default {
   include base
+  include backup
   include internsidor
   include keycloak_liss
   include mediawiki
