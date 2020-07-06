@@ -60,9 +60,12 @@ class internsidor (
     cwd         => $project_path,
     user        => 'www-data',
     refreshonly => true,
-    require     => Python::Requirements[
-      "${project_path}/requirements-prod.txt",
-      "${project_path}/requirements.txt",
+    require     => [
+      Python::Requirements[
+        "${project_path}/requirements-prod.txt",
+        "${project_path}/requirements.txt",
+      ],
+      File[$static_files_path],
     ],
   }
 
@@ -111,9 +114,10 @@ class internsidor (
   }
 
   file {$static_files_path:
-    ensure => directory,
-    owner  => 'www-data',
-    group  => 'www-data',
+    ensure  => directory,
+    owner   => 'www-data',
+    group   => 'www-data',
+    recurse => true
   }
 
   file {'/run/internsidor_gunicorn':
