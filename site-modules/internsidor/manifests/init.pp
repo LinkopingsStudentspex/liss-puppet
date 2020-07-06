@@ -93,7 +93,7 @@ class internsidor (
       Python::Pip['setuptools'],
     ],
     subscribe    => Vcsrepo[$project_path],
-    forceupdate  => true,
+    # forceupdate  => true,
   }
 
   package {[
