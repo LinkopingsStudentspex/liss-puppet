@@ -3,7 +3,6 @@
 
 cd /etc/puppet/code || exit 1
 
-git pull > /dev/null || exit 1
+git pull || exit 1
 
-# Until postgresql_password deprecation fixes have landed, redirect stderr as well to avoid clutter in logs and email
-./update.sh &> /dev/null || exit 1
+./update.sh || exit 1
