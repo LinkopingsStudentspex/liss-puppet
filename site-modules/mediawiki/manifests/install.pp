@@ -86,7 +86,7 @@ class mediawiki::install {
   ]:
   }
 
-  exec {'run install script':
+  exec {'mediawiki_install_script':
     command => "php install.php --dbname ${mediawiki::wiki_db_name} --dbuser ${mediawiki::wiki_db_user} --dbpass \"${mediawiki::wiki_db_pass}\" --dbserver ${mediawiki::wiki_db_host} --extensions WikiEditor,Renameuser,PdfHandler,UserMerge,PluggableAuth,OpenIDConnect --lang sv --scriptpath \"\" --pass \"${mediawiki::wiki_admin_pass}\" \"${mediawiki::wiki_title}\" ${mediawiki::wiki_admin_user }",
     cwd     => '/var/www/mediawiki/maintenance',
     creates => '/var/www/mediawiki/LocalSettings.php',

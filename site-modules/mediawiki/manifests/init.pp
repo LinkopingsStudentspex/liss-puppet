@@ -32,6 +32,6 @@ class mediawiki (
   file {'/var/www/mediawiki/LocalSettings.php':
     ensure  => file,
     content => epp('mediawiki/LocalSettings.php.epp'),
-    require => Mediawiki::Install::Exec['run install script'],
+    require => Exec['mediawiki_install_script'],
   }
 }
