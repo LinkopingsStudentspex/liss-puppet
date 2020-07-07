@@ -16,7 +16,7 @@ class legacy (
     user_attribute  => 'member_number',
     json_type_label => 'int',
     resource_name   => 'member number',
-    type            => 'oidc-usermodel-attribute-mapper',
+    type            => 'oidc-usermodel-property-mapper',
     client          => $oidc_clientid,
     realm           => 'liss',
   }
