@@ -1,5 +1,6 @@
 # Defines the backup jobs that should be done
 class backup (
+  # GPG user ID that can decrypt the backups
   $recipient = "root@${::hostname}",
   $db_backup_location = '/backups/databases',
 ) {
