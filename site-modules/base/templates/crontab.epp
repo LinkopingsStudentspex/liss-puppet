@@ -8,7 +8,7 @@ SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 # m h dom mon dow user  command
-<%= $base::hourly_minute %> *    * * *   root    cd / && run-parts --report /etc/cron.hourly
-<%= $base::daily_minute %> <%= $base::daily_hour %>    * * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )
-<%= $base::weekly_minute %> <%= $base::weekly_hour %>    * * <%= $base::weekly_weekday %>   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )
-<%= $base::montly_minute %> <%= $base::montly_hour %>    <%= $base::monthly_dom %> * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
+<%= $base::cron::hourly_minute %> *    * * *   root    cd / && run-parts --report /etc/cron.hourly
+<%= $base::cron::daily_minute %> <%= $base::cron::daily_hour %>    * * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )
+<%= $base::cron::weekly_minute %> <%= $base::cron::weekly_hour %>    * * <%= $base::cron::weekly_weekday %>   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )
+<%= $base::cron::montly_minute %> <%= $base::cron::montly_hour %>    <%= $base::cron::monthly_dom %> * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
