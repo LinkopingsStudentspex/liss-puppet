@@ -38,6 +38,8 @@ keycloak::realms:
         smtp_server_ssl: true
         smtp_server_starttls: true
         smtp_server_user: "%{smtp_user}"
+        sso_session_idle_timeout: 604800 # Must visit at least once per week to not expire
+        sso_session_max_lifespan: 2592000 # Must re-login after 30 days
         supported_locales:
             - sv
             - en
