@@ -25,7 +25,7 @@ class mediawiki (
   keycloak_client { $oidc_clientid:
     realm                 => 'liss',
     secret                => $oidc_clientsecret,
-    redirect_uris         => ["http://${domain}/index.php?title=Special:PluggableAuthLogin"],
+    redirect_uris         => ["https://${domain}/index.php?title=Special:PluggableAuthLogin"],
     default_client_scopes => ['profile', 'email'],
   }
 
