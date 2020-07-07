@@ -11,4 +11,4 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 <%= $base::cron::hourly_minute %> *    * * *   root    cd / && run-parts --report /etc/cron.hourly
 <%= $base::cron::daily_minute %> <%= $base::cron::daily_hour %>    * * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )
 <%= $base::cron::weekly_minute %> <%= $base::cron::weekly_hour %>    * * <%= $base::cron::weekly_weekday %>   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )
-<%= $base::cron::montly_minute %> <%= $base::cron::montly_hour %>    <%= $base::cron::monthly_dom %> * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
+<%= $base::cron::monthly_minute %> <%= $base::cron::monthly_hour %>    <%= $base::cron::monthly_dom %> * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )

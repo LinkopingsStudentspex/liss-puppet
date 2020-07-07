@@ -6,9 +6,9 @@ class base::cron (
   $weekly_weekday = 7,
   $weekly_hour    = 6,
   $weekly_minute  = 47,
-  $montly_dom     = 1,
+  $monthly_dom     = 1,
   $monthly_hour   = 6,
-  $montly_minute  = 52,
+  $monthly_minute  = 52,
 ) {
   file {'/etc/crontab':
     ensure  => file,
