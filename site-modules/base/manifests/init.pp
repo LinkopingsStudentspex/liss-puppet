@@ -2,7 +2,7 @@
 class base {
   include unattended_upgrades
   include firewalld
-  include base::cron
+  contain base::cron
 
   package {'fail2ban':}
 
