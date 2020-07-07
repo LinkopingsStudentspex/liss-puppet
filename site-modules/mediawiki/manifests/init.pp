@@ -25,6 +25,11 @@ class mediawiki (
     password => $wiki_db_pass,
   }
 
+  # Dummy file to make logrotate script happy
+  file {'/etc/mysql/debian.cnf':
+    ensure => present,
+  }
+
   keycloak_client { $oidc_clientid:
     realm                 => 'liss',
     secret                => $oidc_clientsecret,

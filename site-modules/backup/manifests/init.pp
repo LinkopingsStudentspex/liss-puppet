@@ -11,7 +11,7 @@ class backup (
 
   file {$db_backup_location:
     ensure => directory,
-    mode   => 'a+rw',
+    mode   => '0755',
   }
 
   $pg_backup_script = '/usr/local/bin/backup_db_postgres.sh'
