@@ -1,5 +1,5 @@
 # Configures the times of the automatic cron jobs in /etc/cron.xxxx
-class cron (
+class base::cron (
   $hourly_minute  = 17,
   $daily_hour     = 6,
   $daily_minute   = 25,
