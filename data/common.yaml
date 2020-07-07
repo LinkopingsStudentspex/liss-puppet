@@ -48,6 +48,7 @@ keycloak_liss::batadas_userlookup_url: https://internt.%{organization_domain}/ba
 keycloak_liss::domain: konto.%{organization_domain}
 
 internsidor::domain: internt.%{organization_domain}
+internsidor::gunicorn_port: 8087
 internsidor::milter_port: 8082
 internsidor::recipient_lookup_port: 9999
 internsidor::debug: false
