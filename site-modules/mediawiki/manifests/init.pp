@@ -15,7 +15,7 @@ class mediawiki (
   $wiki_db_name = 'wikidb',
   $wiki_db_pass = '',
   $wiki_db_user = 'wikiuser',
-  $wiki_title = 'Internwiki',
+  $wiki_title = 'LissWiki',
 
 ) {
   require mysql::server
