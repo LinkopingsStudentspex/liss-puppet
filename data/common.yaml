@@ -1,6 +1,6 @@
-organization_domain: dev.studentspex.se
+organization_domain: studentspex.se
 smtp_host: smtp.eu.mailgun.org
-smtp_user: postmaster@dev.studentspex.se
+smtp_user: postmaster@studentspex.se
 smtp_port: 465
 keycloak_auth_url: https://%{lookup('keycloak_liss::domain')}/auth
 
