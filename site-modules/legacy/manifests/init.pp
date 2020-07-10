@@ -10,17 +10,4 @@ class legacy (
     redirect_uris         => ["https://${domain}/*"],
     default_client_scopes => ['profile', 'email', 'member_number'],
   }
-
-  keycloak_client_scope { 'member_number':
-    realm => 'liss',
-  }
-
-  keycloak_protocol_mapper { 'member_number':
-    user_attribute  => 'member_number',
-    claim_name      => 'member_number',
-    json_type_label => 'int',
-    client_scope    => 'member_number',
-    realm           => 'liss',
-    require         => Keycloak_client_scope['member_number'],
-  }
 }
