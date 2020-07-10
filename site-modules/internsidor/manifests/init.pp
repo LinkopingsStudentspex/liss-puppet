@@ -40,7 +40,8 @@ class internsidor (
 
   # Create and manage a user that can connect from the old system
   user {'lisse':
-    home => '/home/lisse',
+    home       => '/home/lisse',
+    managehome => true,
   }
 
   # Only allow lisse to run the sync/export script from ssh
