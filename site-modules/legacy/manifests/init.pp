@@ -8,16 +8,19 @@ class legacy (
     realm                 => 'liss',
     secret                => $oidc_clientsecret,
     redirect_uris         => ["https://${domain}/*"],
-    default_client_scopes => ['profile', 'email'],
+    default_client_scopes => ['profile', 'email', 'member_number'],
   }
 
-  keycloak_client_protocol_mapper { 'member number for legacy site':
-    claim_name      => 'member_number',
+  keycloak_client_scope { 'member_number':
+    realm => 'liss',
+  }
+
+  keycloak_protocol_mapper { 'member_number':
     user_attribute  => 'member_number',
+    claim_name      => 'member_number',
     json_type_label => 'int',
-    resource_name   => 'member number',
-    type            => 'oidc-usermodel-property-mapper',
-    client          => $oidc_clientid,
+    client_scope    => 'member_number',
     realm           => 'liss',
+    require         => Keycloak_client_scope['member_number'],
   }
 }
