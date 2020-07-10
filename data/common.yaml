@@ -78,6 +78,8 @@ postfix::parameters:
         comments:
             - Milter that checks for authorized senders to protected lists and rewrites some subject headers
         value: inet:localhost:%{lookup('internsidor::milter_port')}
+    
+    alias_maps: /etc/aliases
 
     virtual_alias_maps:
         comments:
