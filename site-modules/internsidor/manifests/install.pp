@@ -19,6 +19,8 @@ class internsidor::install {
     source   => 'https://github.com/linkopingsstudentspex/internsidor.git',
     notify   => [
       Service['internsidor-gunicorn'],
+      Service['lissmilter'],
+      Service['recipient-lookup'],
       Exec['migrate django database'],
       Exec['collect static files'],
     ]
