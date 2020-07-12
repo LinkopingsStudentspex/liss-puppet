@@ -10,3 +10,8 @@ div#kc-header-wrapper {
     margin: 0 auto;
     padding-top: 160px;
 }
+
+div.liss-help {
+    font-size: small;
+    padding-top: 1em;
+}
