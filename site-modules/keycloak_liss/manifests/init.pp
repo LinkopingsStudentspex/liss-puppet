@@ -4,7 +4,7 @@ class keycloak_liss (
   $domain = '',
   $fail2ban_bantime = 600,
   $fail2ban_findtime = 600,
-  $fail2ban_maxretry = 5,
+  $fail2ban_maxretry = 10,
 ){
   require keycloak
 
