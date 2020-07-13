@@ -7,7 +7,6 @@
             <p>Då måste du skapa ett nytt lösenord genom att klicka på "Glömt lösenord?" och fylla i det användarnamn eller den mailadress du har registrerat hos spexet.</p>
             <p>Därefter klickar du på länken i mailet du fått och väljer ett nytt lösenord.</p>
             <p><strong>OBS:</strong> Det är inte längre möjligt att logga in med sitt medlemsnummer. Endast användarnamn eller e-post fungerar.</p>
-            <p><strong>OBS:</strong> Det är skillnad på små och stora bokstäver i användarnamn.</p>
         </div>
     <#elseif section = "form">
     <div id="kc-form" <#if realm.password && social.providers??>class="${properties.kcContentWrapperClass!}"</#if>>
