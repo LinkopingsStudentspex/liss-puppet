@@ -1,6 +1,6 @@
 # Configures and installs the django application
 class internsidor (
-  $admin_email           = "\"Spexets internsidor\" <root@${::organization_domain}>",
+  $admin_email           = "root@${::organization_domain}",
   $debug                 = false,
   $django_db_name        = 'django',
   $django_db_pass        = '',
