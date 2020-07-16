@@ -70,8 +70,13 @@ $wgMemCachedServers = [];
 ## To enable image uploads, make sure the 'images' directory
 ## is writable, then set this to true:
 $wgEnableUploads = true;
-#$wgUseImageMagick = true;
-#$wgImageMagickConvertCommand = "/usr/bin/convert";
+$wgUseImageMagick = true;
+$wgImageMagickConvertCommand = "/usr/bin/convert";
+
+$wgFileExtensions = array( 'png', 'gif', 'jpg', 'jpeg', 'ogg', 'pdf', 'mp3', 'mid', 'sib', 'zip', 'ldif', 'xls', 'mpeg', 'rtf');
+$wgMimeDetectorCommand= "file -bi";
+$wgVerifyMimeType = false;
+$wgStrictFileExtensions = false;
 
 # InstantCommons allows wiki to use images from https://commons.wikimedia.org
 $wgUseInstantCommons = false;
@@ -89,7 +94,17 @@ $wgShellLocale = "C.UTF-8";
 ## Set $wgCacheDirectory to a writable directory on the web server
 ## to make your wiki go slightly faster. The directory should not
 ## be publicly accessible from the web.
-#$wgCacheDirectory = "$IP/cache";
+$wgCacheDirectory = "$IP/cache";
+
+# Disable automatic update of the localisation cache on requests
+$wgLocalisationCacheConf['manualRecache'] = true;
+
+# When you make changes to this configuration file, this will make
+# sure that cached pages are cleared.
+$configdate = gmdate( 'YmdHis', @filemtime( __FILE__ ) );
+$wgCacheEpoch = max( $wgCacheEpoch, $configdate );
+
+$wgLocaltimeZone="Europe/Stockholm";
 
 # Site language code, should be one of the list in ./languages/data/Names.php
 $wgLanguageCode = "sv";

@@ -73,6 +73,14 @@ class mediawiki::install {
     require => Archive[$archive_name],
   }
 
+  file {'/var/www/mediawiki/cache':
+    ensure  => directory,
+    owner   => 'www-data',
+    group   => 'www-data',
+    mode    => '0755',
+    require => File['/var/www/mediawiki'],
+  }
+
   package {[
     'php',
     'php-apcu',
@@ -83,6 +91,7 @@ class mediawiki::install {
     'php-xml',
     'php-mysql',
     'python3-pymysql',
+    'imagemagick',
   ]:
   }
 

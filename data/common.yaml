@@ -66,6 +66,11 @@ mediawiki::baseurl: https://%{lookup('mediawiki::domain')}
 mediawiki::version_major_minor: '1.34'
 mediawiki::version_patch: '2'
 
+php::fpm::settings:
+    PHP/post_max_size: '100M'
+    PHP/upload_max_filesize: '50M'
+    Date/date.timezone: 'Europe/Stockholm'
+
 postfix::parameters:
     myorigin: "%{organization_domain}"
     mydestination: "$myhostname localhost %{organization_domain}"
