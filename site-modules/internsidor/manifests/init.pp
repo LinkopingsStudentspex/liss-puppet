@@ -15,6 +15,9 @@ class internsidor (
   $milter_port           = undef,
   $recipient_lookup_port = undef,
   $gunicorn_port         = undef,
+  $gsuite_auth_email     = '',
+  $gsuite_account_file   = '/var/lib/internsidor/credentials.json',
+  $gsuite_domain         = $::organization_domain,
 ) {
   include nginx
   include postgresql::server

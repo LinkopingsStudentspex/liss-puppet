@@ -62,3 +62,7 @@ STATIC_ROOT = '<%= $internsidor::static_files_path %>/'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 USE_X_FORWARDED_HOST = True
 
+PROVISION_GSUITE_ACCOUNTS = True
+GSUITE_AUTH_EMAIL = '<%= $internsidor::gsuite_auth_email %>'
+GSUITE_DOMAIN = '<%= $internsidor::gsuite_domain %>'
+GSUITE_SERVICE_ACCOUNT_FILE = '<%= $internsidor::gsuite_account_file %>'
