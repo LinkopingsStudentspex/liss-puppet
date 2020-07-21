@@ -1,7 +1,7 @@
 # Defines the backup jobs that should be done
 class backup (
-  # GPG user ID that can decrypt the backups
-  $recipient = "root@${::hostname}",
+  # GPG user IDs that can decrypt the backups
+  Array[String] $recipients = [],
   $db_backup_location = '/backups/databases',
 ) {
 
@@ -17,18 +17,18 @@ class backup (
 
   $pg_backup_script = '/usr/local/bin/backup_db_postgres.sh'
   file {$pg_backup_script:
-    source => 'puppet:///modules/backup/backup_db_postgres.sh',
-    mode   => 'a+x',
+    content => epp('backup/backup_db_postgres.sh.epp'),
+    mode    => 'a+x',
   }
 
   $mysql_backup_script = '/usr/local/bin/backup_db_mysql.sh'
   file {$mysql_backup_script:
-    source => 'puppet:///modules/backup/backup_db_mysql.sh',
-    mode   => 'a+x',
+    content => epp('backup/backup_db_mysql.sh.epp'),
+    mode    => 'a+x',
   }
 
   cron {'backup database django':
-    command => "${pg_backup_script} django ${db_backup_location} ${recipient}",
+    command => "${pg_backup_script} django ${db_backup_location}",
     user    => 'root',
     weekday => '*',
     hour    => '03',
@@ -40,7 +40,7 @@ class backup (
   }
 
   cron {'backup database keycloak':
-    command => "${pg_backup_script} keycloak ${db_backup_location} ${recipient}",
+    command => "${pg_backup_script} keycloak ${db_backup_location}",
     user    => 'root',
     weekday => '*',
     hour    => '03',
@@ -52,7 +52,7 @@ class backup (
   }
 
   cron {'backup database wikidb':
-    command => "${mysql_backup_script} wikidb ${db_backup_location} ${recipient}",
+    command => "${mysql_backup_script} wikidb ${db_backup_location}",
     user    => 'root',
     weekday => '*',
     hour    => '03',
