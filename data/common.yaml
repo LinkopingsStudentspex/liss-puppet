@@ -99,14 +99,14 @@ postfix::parameters:
     smtp_tls_wrappermode: 'yes'
     smtp_sasl_password_maps: "static:%{lookup('smtp_user')}:%{lookup('smtp_password')}"
 
-letsencrypt::email: root@dev.studentspex.se
+letsencrypt::email: root@studentspex.se
 
 unattended_upgrades::auto:
     reboot: true
     reboot_time: '04:41'
 unattended_upgrades::mail:
     only_on_error: true
-    to: root@dev.studentspex.se
+    to: root@studentspex.se
 unattended_upgrades::verbose: 1
 
 # Configure the firewall
