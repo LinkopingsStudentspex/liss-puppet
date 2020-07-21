@@ -64,7 +64,7 @@ class internsidor::install {
       Python::Pip['setuptools'],
     ],
     subscribe    => Vcsrepo[$internsidor::project_path],
-    # forceupdate  => true,
+    forceupdate  => true,
   }
 
   package {[
