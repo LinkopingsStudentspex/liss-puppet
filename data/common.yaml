@@ -75,6 +75,7 @@ postfix::parameters:
     myorigin: "%{organization_domain}"
     mydestination: "$myhostname localhost %{organization_domain}"
     smtpd_relay_restrictions: permit_mynetworks defer
+    smtpd_client_restrictions: permit_mynetworks defer
     mynetworks:
         comments:
             - Allow mail from SUNET email filters
