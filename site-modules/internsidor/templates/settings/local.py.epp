@@ -12,9 +12,9 @@ OIDC_OP_LOGOUT_ENDPOINT =        '<%= $::keycloak_auth_url %>/realms/liss/protoc
 
 EMAIL_HOST = '<%= $::smtp_host %>'
 EMAIL_PORT = '<%= $::smtp_port %>'
-EMAIL_HOST_USER = '<%= $::smtp_user %>'
-EMAIL_HOST_PASSWORD = '<%= $::smtp_password %>'
-EMAIL_USE_SSL = True
+# EMAIL_HOST_USER = '<%= $::smtp_user %>'
+# EMAIL_HOST_PASSWORD = '<%= $::smtp_password %>'
+# EMAIL_USE_SSL = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '<%= $internsidor::django_secret_key %>'
