@@ -1,6 +1,6 @@
 organization_domain: studentspex.se
 smtp_host: localhost
-#smtp_user: postmaster@studentspex.se
+smtp_user: postmaster@studentspex.se
 smtp_port: 25
 keycloak_auth_url: https://%{lookup('keycloak_liss::domain')}/auth
 
