@@ -62,4 +62,16 @@ class backup (
       Package['gnupg'],
     ],
   }
+
+  # Only keeps database backups within the last 30 days
+  cron {'remove old database backups':
+    command => "find ${db_backup_location}/* -mtime +30 -type f -delete",
+    user    => 'root',
+    weekday => '*',
+    hour    => '03',
+    minute  => '30',
+    require => [
+      File[$db_backup_location],
+    ],
+  }
 }
