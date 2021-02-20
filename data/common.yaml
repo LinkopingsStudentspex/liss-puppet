@@ -146,7 +146,7 @@ telegraf::inputs:
           data_type: integer
           name_override: logged_on_users
         - commands:
-            - '/bin/bash -c "cat /proc/uptime | awk \'{print $1}\'"'
+            - '/bin/bash -c "cat /proc/uptime | awk \"{print $1}\""'
           data_format: value
           data_type: float
           name_override: uptime
