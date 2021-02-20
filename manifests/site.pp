@@ -12,4 +12,5 @@ node default {
   include keycloak_liss
   include legacy
   include mediawiki
+  include telegraf
 }

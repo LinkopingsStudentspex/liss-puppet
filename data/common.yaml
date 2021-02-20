@@ -120,3 +120,23 @@ firewalld::services:
         ensure: present
     smtp:
         ensure: present
+
+# Set up telegraf to send telemetry to separate monitoring server
+telegraf::outputs:
+    influxdb:
+        - urls:
+            - "https://spexstats.karlinde.se:8087"
+          database: 'lissit'
+          timeout: '10s'
+          username: "%{lookup('influxdb_user')}"
+          password: "%{lookup('influxdb_password')}"
+
+telegraf::inputs:
+    cpu:
+        - percpu: true
+          totalcpu: true
+    exec:
+        - commands:
+            - who | wc -l
+        - commands:
+            - cat /proc/uptime | awk '{print $1}'
