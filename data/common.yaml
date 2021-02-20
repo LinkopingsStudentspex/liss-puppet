@@ -122,6 +122,10 @@ firewalld::services:
         ensure: present
 
 # Set up telegraf to send telemetry to separate monitoring server
+telegraf::agent:
+    collection_jitter: '10s'
+    interval: '5m'
+
 telegraf::outputs:
     influxdb:
         - urls:
@@ -137,6 +141,12 @@ telegraf::inputs:
           totalcpu: true
     exec:
         - commands:
-            - who | wc -l
+            - '/bin/bash -c "who | wc -l"'
+          data_format: value
+          data_type: integer
+          name_override: logged_on_users
         - commands:
-            - cat /proc/uptime | awk '{print $1}'
+            - '/bin/bash -c "cat /proc/uptime | awk \'{print $1}\'"'
+          data_format: value
+          data_type: float
+          name_override: uptime
