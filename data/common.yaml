@@ -150,3 +150,11 @@ telegraf::inputs:
           data_format: value
           data_type: float
           name_override: uptime
+    tail:
+        - files:
+            - '/var/log/mail.log'
+          data_format: grok
+          name_suffix: "_mail"
+          grok_patterns:
+            - '%{SYSLOGTIMESTAMP:timestamp:ts-syslog} studentspex postfix/smtp\[.* orig_to=<%{EMAILADDRESS:orig_to:tag}>.*delay=%{NUMBER:delay:float}.*dsn=%{INTS_AND_DOTS:dsn:tag}.*'
+          grok_custom_patterns: "INTS_AND_DOTS [0-9.]+"
