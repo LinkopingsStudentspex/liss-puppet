@@ -78,8 +78,8 @@ postfix::parameters:
     smtpd_client_restrictions: permit_mynetworks defer
     mynetworks:
         comments:
-            - Allow mail from SUNET email filters
-        value: 127.0.0.0/8 192.36.171.200/29 89.45.235.0/28 [2001:6b0:8:2::]/64 [2001:6b0:5a:4019::]/64
+            - Allow mail from SUNET email filters and localhost
+        value: 127.0.0.0/8 [::1]/128 192.36.171.200/29 89.45.235.0/28 [2001:6b0:8:2::]/64 [2001:6b0:5a:4019::]/64
 
     smtpd_milters:
         comments:
