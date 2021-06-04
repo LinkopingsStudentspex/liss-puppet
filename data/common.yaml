@@ -159,3 +159,18 @@ telegraf::inputs:
             - '%{literal("%")}{SYSLOGTIMESTAMP:timestamp:ts-syslog} studentspex postfix/smtp\[.* orig_to=<%{literal("%")}{EMAILADDRESS:orig_to:tag}>.*delay=%{literal("%")}{NUMBER:delay:float}.*dsn=%{literal("%")}{INTS_AND_DOTS:dsn:tag}.*'
           grok_custom_patterns: "INTS_AND_DOTS [0-9.]+"
           grok_timezone: "Europe/Stockholm"
+        - files:
+            - '/var/log/mail.log'
+          data_format: grok
+          name_suffix: "_mail_warnings"
+          grok_patterns:
+            - '%{literal("%")}{SYSLOGTIMESTAMP:timestamp:ts-syslog} studentspex postfix/smtpd\[.* warning: %{literal("%")}{GREEDYDATA:warning}'
+          grok_timezone: "Europe/Stockholm"
+        - files:
+            - '/var/log/mail.log'
+          data_format: grok
+          name_suffix: "_mail_rejections"
+          grok_patterns:
+            - '%{literal("%")}{SYSLOGTIMESTAMP:timestamp:ts-syslog} studentspex postfix/smtpd\[.* NOQUEUE: reject: .*\[.*\]: %{literal("%")}{NUMBER:dsn_num:int} %{literal("%")}{INTS_AND_DOTS:dsn:tag}.*'
+          grok_custom_patterns: "INTS_AND_DOTS [0-9.]+"
+          grok_timezone: "Europe/Stockholm"
