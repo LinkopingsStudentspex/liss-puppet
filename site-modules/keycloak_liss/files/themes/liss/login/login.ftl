@@ -3,10 +3,8 @@
     <#if section = "header">
         ${msg("doLogIn")}
         <div class="liss-help">
-            <p>Är detta första gången du loggar in på nya sidorna?</p>
-            <p>Då måste du skapa ett nytt lösenord genom att klicka på "Glömt lösenord?" och fylla i det användarnamn eller den mailadress du har registrerat hos spexet.</p>
-            <p>Därefter klickar du på länken i mailet du fått och väljer ett nytt lösenord.</p>
-            <p><strong>OBS:</strong> Det är inte längre möjligt att logga in med sitt medlemsnummer. Endast användarnamn eller e-post fungerar.</p>
+            <p>Har du skapat ett konto men inte satt något lösenord än? Klicka då på "Glömt lösenord?" nedan.</p>
+            <p>Har du inget användarkonto? Då måste du kontakta någon i styrelsen eller en aktiv direktion för att få ett skapat åt dig.</p>
         </div>
     <#elseif section = "form">
     <div id="kc-form" <#if realm.password && social.providers??>class="${properties.kcContentWrapperClass!}"</#if>>
