@@ -1,6 +1,5 @@
 organization_domain: studentspex.se
-smtp_host: localhost
-smtp_user: postmaster@studentspex.se
+smtp_host: smtp.liu.se
 smtp_port: 25
 keycloak_auth_url: https://%{lookup('keycloak_liss::domain')}/auth
 
@@ -15,29 +14,19 @@ keycloak::realms_merge: true
 keycloak::realms:
     master:
         remember_me: false
-        # smtp_server_auth: true
         smtp_server_from_display_name: 'Spexets internsidor'
         smtp_server_from: root@%{organization_domain}
         smtp_server_host: "%{smtp_host}"
-        # smtp_server_password: "%{lookup('smtp_password')}"
         smtp_server_port: "%{smtp_port}"
-        # smtp_server_ssl: true
-        # smtp_server_starttls: true
-        # smtp_server_user: "%{smtp_user}"
     liss:
         display_name: 'Linköpings Studentspex'
         internationalization_enabled: true
         login_theme: liss
         remember_me: true
-        # smtp_server_auth: true
         smtp_server_from_display_name: 'Spexets internsidor'
         smtp_server_from: root@%{organization_domain}
         smtp_server_host: "%{smtp_host}"
-        # smtp_server_password: "%{lookup('smtp_password')}"
         smtp_server_port: "%{smtp_port}"
-        # smtp_server_ssl: true
-        # smtp_server_starttls: true
-        # smtp_server_user: "%{smtp_user}"
         sso_session_idle_timeout: 604800 # Must visit at least once per week to not expire
         sso_session_max_lifespan: 2592000 # Must re-login after 30 days
         supported_locales:
@@ -78,8 +67,8 @@ postfix::parameters:
     smtpd_client_restrictions: permit_mynetworks defer
     mynetworks:
         comments:
-            - Allow mail from SUNET email filters and localhost
-        value: 127.0.0.0/8 [::1]/128 192.36.171.200/29 89.45.235.0/28 [2001:6b0:8:2::]/64 [2001:6b0:5a:4019::]/64 alunia.it.liu.se andania.it.liu.se smtp.it.liu.se
+            - Allow mail from email filters and localhost
+        value: 127.0.0.0/8 [::1]/128 alunia.it.liu.se andania.it.liu.se smtp.liu.se
 
     smtpd_milters:
         comments:
@@ -93,12 +82,7 @@ postfix::parameters:
             - Connects to a daemon that performs a lookup against the database of email lists recipients
         value: socketmap:inet:localhost:%{lookup('internsidor::recipient_lookup_port')}:virtual
 
-    # relayhost: "%{smtp_host}:%{smtp_port}"
-    # smtp_sasl_auth_enable: 'yes'
-    # smtp_sasl_security_options: noanonymous
-    # smtp_tls_security_level: encrypt
-    # smtp_tls_wrappermode: 'yes'
-    # smtp_sasl_password_maps: "static:%{lookup('smtp_user')}:%{lookup('smtp_password')}"
+    relayhost: "%{smtp_host}:%{smtp_port}"
 
 letsencrypt::email: root@studentspex.se
 
