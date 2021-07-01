@@ -11,12 +11,6 @@ class internsidor::web_server {
     require    => Package['libpq-dev'],
   }
 
-  file {'/run/internsidor_gunicorn':
-    ensure => directory,
-    owner  => 'www-data',
-    group  => 'www-data',
-  }
-
   file {'/etc/systemd/system/internsidor-gunicorn.service':
     ensure  => file,
     content => epp('internsidor/internsidor-gunicorn.service.epp')
@@ -30,6 +24,24 @@ class internsidor::web_server {
       "${internsidor::project_path}/requirements.txt",
     ],
     subscribe => File['/etc/systemd/system/internsidor-gunicorn.service'],
+  }
+
+  # Work around the fact that the nginx service from the puppet module doesn't create 
+  # the /run/nginx directory on startup, by adding the RuntimeDirectory setting for it in systemd.
+  file {'/etc/systemd/system/nginx.service.d/override.conf':
+    ensure  => file,
+    owner   => 0,
+    group   => 0,
+    mode    => '0644',
+    content => "[Service]\nRuntimeDirectory=nginx\n",
+    notify  => [
+      Service['nginx'],
+    ]
+  }
+
+  file {'/etc/systemd/system/nginx.service.d':
+    ensure  => directory,
+    mode    => '0755',
   }
 
   nginx::resource::server { $internsidor::domain:

@@ -4,6 +4,7 @@ After = network.target
 
 [Service]
 PermissionsStartOnly = true
+RuntimeDirectory = internsidor_gunicorn
 PIDFile = /run/internsidor_gunicorn/internsidor_gunicorn.pid
 User = www-data
 Group = www-data
