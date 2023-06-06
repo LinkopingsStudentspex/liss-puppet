@@ -41,7 +41,7 @@ class base {
   # Stop old puppet logs from accruing more than ~6 months. As of
   # 230606 1/3 of the disk space was taken up by puppet logs.
   tidy { 'puppet-log-cleanup':
-    path    => '/var/cache/puppet/reports/studentspex.lysator.liu.se',
+    path    => "/var/cache/puppet/reports/${facts['fqdn']}",
     age     => '24w',
     recurse => true,
     rmdirs  => false,
