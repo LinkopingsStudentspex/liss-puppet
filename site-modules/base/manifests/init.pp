@@ -2,16 +2,9 @@
 class base {
   include unattended_upgrades
   include firewalld
-  include telegraf
   contain base::cron
 
   package {'fail2ban':}
-
-  # Required for telegraf module
-  package {'toml-rb':
-    ensure   => 'installed',
-    provider => 'gem',
-  }
 
   file {'/etc/fail2ban/jail.local':
     ensure  => file,
