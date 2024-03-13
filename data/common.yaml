@@ -68,7 +68,7 @@ postfix::parameters:
     mynetworks:
         comments:
             - Allow mail from email filters and localhost
-        value: 127.0.0.0/8 [::1]/128 alunia.it.liu.se andania.it.liu.se smtp.liu.se
+        value: 127.0.0.0/8 [::1]/128 ekholmen.it.liu.se hjulsbro.it.liu.se smtp.liu.se
 
     smtpd_milters:
         comments:
