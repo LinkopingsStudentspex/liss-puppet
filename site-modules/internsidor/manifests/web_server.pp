@@ -2,7 +2,7 @@
 class internsidor::web_server {
 
   # To avoid collision with nginx. Why was this even installed?
-  package {'apache2':
+  package {['apache2', 'apache2-bin']:
     ensure => absent,
   }
 
