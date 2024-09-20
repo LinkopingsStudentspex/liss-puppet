@@ -42,6 +42,9 @@ internsidor::milter_port: 8082
 internsidor::recipient_lookup_port: 9999
 internsidor::debug: false
 
+# Tried to install pip through the old name. Anyways, pip is auto-updated nowadays.
+python::manage_pip_package: false
+
 base::cron::daily_hour: 3
 base::cron::daily_minute: 55
 
@@ -55,6 +58,8 @@ mediawiki::baseurl: https://%{lookup('mediawiki::domain')}
 mediawiki::version_major_minor: '1.34'
 mediawiki::version_patch: '2'
 
+# Manually set with upgrade to Ubuntu 20.04 to match the packaged version.
+php::globals::php_version: '7.4'
 php::fpm::settings:
     PHP/post_max_size: '100M'
     PHP/upload_max_filesize: '50M'
@@ -74,7 +79,7 @@ postfix::parameters:
         comments:
             - Milter that checks for authorized senders to protected lists and rewrites some subject headers
         value: inet:localhost:%{lookup('internsidor::milter_port')}
-    
+
     alias_maps: hash:/etc/aliases
 
     virtual_alias_maps:

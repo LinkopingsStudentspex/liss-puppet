@@ -14,7 +14,7 @@ mod 'puppet-letsencrypt',
 
 mod 'puppet-nginx', '1.1.0'
 mod 'puppet-php', '7.1.0'
-mod 'puppet-python', '4.1.1'
+mod 'puppet-python', '5.0.0'
 mod 'puppet-unattended_upgrades', '5.0.0'
 mod 'puppet-zypprepo', '2.2.2'
 mod 'puppetlabs-apt', '7.4.2'
