@@ -6,6 +6,7 @@ class legacy (
   $spexflix_domain = '',
 ) {
   keycloak_client { $oidc_clientid:
+    ensure                => 'absent',
     realm                 => 'liss',
     secret                => $oidc_clientsecret,
     redirect_uris         => ["https://${domain}/*", "https://${spexflix_domain}/*"],
