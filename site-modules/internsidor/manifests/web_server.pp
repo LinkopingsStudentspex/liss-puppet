@@ -19,14 +19,14 @@ class internsidor::web_server {
   service {'internsidor-gunicorn':
     ensure    => running,
     enable    => true,
-    require   => Python::Requirements[
-      "${internsidor::project_path}/requirements-prod.txt",
-      "${internsidor::project_path}/requirements.txt",
-    ],
+    # require   => Python::Requirements[
+    #   "${internsidor::project_path}/requirements-prod.txt",
+    #   "${internsidor::project_path}/requirements.txt",
+    # ],
     subscribe => File['/etc/systemd/system/internsidor-gunicorn.service'],
   }
 
-  # Work around the fact that the nginx service from the puppet module doesn't create 
+  # Work around the fact that the nginx service from the puppet module doesn't create
   # the /run/nginx directory on startup, by adding the RuntimeDirectory setting for it in systemd.
   file {'/etc/systemd/system/nginx.service.d/override.conf':
     ensure  => file,
