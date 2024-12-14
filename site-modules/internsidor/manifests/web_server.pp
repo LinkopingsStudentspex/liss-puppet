@@ -19,10 +19,9 @@ class internsidor::web_server {
   service {'internsidor-gunicorn':
     ensure    => running,
     enable    => true,
-    # require   => Python::Requirements[
-    #   "${internsidor::project_path}/requirements-prod.txt",
-    #   "${internsidor::project_path}/requirements.txt",
-    # ],
+    require   => Python::Requirements[
+      "${internsidor::project_path}/requirements-prod.txt",
+    ],
     subscribe => File['/etc/systemd/system/internsidor-gunicorn.service'],
   }
 

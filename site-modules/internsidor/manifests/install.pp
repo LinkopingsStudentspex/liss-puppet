@@ -39,10 +39,9 @@ class internsidor::install {
     user        => 'www-data',
     refreshonly => true,
     require     => [
-      # Python::Requirements[
-      #   "${internsidor::project_path}/requirements-prod.txt",
-      #   "${internsidor::project_path}/requirements.txt",
-      # ],
+       Python::Requirements[
+         "${internsidor::project_path}/requirements-prod.txt",
+       ],
       File[$internsidor::static_files_path],
     ],
   }
@@ -56,16 +55,16 @@ class internsidor::install {
     ensure => latest,
   }
 
-  # python::requirements  { ["${internsidor::project_path}/requirements-prod.txt", "${internsidor::project_path}/requirements.txt"]:
-  #   virtualenv   => $internsidor::venv_path,
-  #   pip_provider => pip3,
-  #   require      => [
-  #     Python::Virtualenv[$internsidor::venv_path],
-  #     Python::Pip['setuptools'],
-  #   ],
-  #   subscribe    => Vcsrepo[$internsidor::project_path],
-  #   forceupdate  => true,
-  # }
+  python::requirements  { "${internsidor::project_path}/requirements-prod.txt":
+    virtualenv   => $internsidor::venv_path,
+    pip_provider => pip3,
+    require      => [
+      Python::Virtualenv[$internsidor::venv_path],
+      Python::Pip['setuptools'],
+    ],
+    subscribe    => Vcsrepo[$internsidor::project_path],
+    forceupdate  => true,
+  }
 
   package {[
     'python3-psycopg2',
