@@ -89,4 +89,29 @@ class internsidor::install {
     group   => 'www-data',
     recurse => true
   }
+
+  $spexflix_media_path = "${internsidor::media_files_path}/spexflix"
+
+  dirtree {$spexflix_media_path:
+    ensure  => present,
+    parents => true,
+  }
+
+  file {$internsidor::media_files_path:
+    ensure  => directory,
+    owner   => 'www-data',
+    group   => 'www-data',
+    recurse => true
+  }
+
+  mount { $spexflix_media_path:
+    device   => "${::nfs_storage_path}/spexflix",
+    atboot   => yes,
+    fstype   => "nfs4",
+    options  => "sec=sys,rw,nodev,nosuid,hard",
+    ensure   => mounted,
+    remounts => true,
+    pass     => "0",
+    require  => File[$spexflix_media_path], 
+  }
 }

@@ -2,6 +2,7 @@ organization_domain: studentspex.se
 smtp_host: smtp.liu.se
 smtp_port: 25
 keycloak_auth_url: https://%{lookup('keycloak_liss::domain')}/auth
+nfs_storage_path: forstor.lysator.liu.se:/liss
 
 nginx::server_purge: true
 

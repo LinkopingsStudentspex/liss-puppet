@@ -9,6 +9,5 @@ node default {
   include backup
   include internsidor
   include keycloak_liss
-  include legacy
   include mediawiki
 }

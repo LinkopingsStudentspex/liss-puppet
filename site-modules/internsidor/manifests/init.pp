@@ -11,6 +11,7 @@ class internsidor (
   $oidc_clientsecret     = '',
   $project_path          = '/opt/internsidor/src',
   $static_files_path     = '/var/www/internsidor/static',
+  $media_files_path      = '/var/www/internsidor/media',
   $venv_path             = '/opt/internsidor/venv',
   $milter_port           = undef,
   $recipient_lookup_port = undef,

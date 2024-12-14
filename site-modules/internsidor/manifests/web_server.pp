@@ -66,4 +66,10 @@ class internsidor::web_server {
     ssl            => true,
     ssl_only       => true,
   }
+
+  # Redirect requests to old domain to new location
+  nginx::resource::server { $legacy::spexflix_domain:
+    maintenance       => true,
+    maintenance_value => "return 301 $scheme://${internsidor::domain}/spexflix$request_uri",
+  }
 }
