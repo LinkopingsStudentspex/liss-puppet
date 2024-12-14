@@ -101,7 +101,14 @@ class internsidor::install {
     ensure  => directory,
     owner   => 'www-data',
     group   => 'www-data',
-    recurse => true
+  }
+
+  file {$spexflix_media_path:
+    ensure  => directory,
+    owner   => 'www-data',
+    group   => 'www-data',
+    recurse => true,
+    require => File[$internsidor::media_files_path],
   }
 
   mount { $spexflix_media_path:
