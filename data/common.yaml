@@ -49,8 +49,6 @@ python::manage_pip_package: false
 base::cron::daily_hour: 3
 base::cron::daily_minute: 55
 
-legacy::domain: old.%{organization_domain}
-legacy::spexflix_domain: spexflix.%{organization_domain}
 
 mysql::server::remove_default_accounts: true
 

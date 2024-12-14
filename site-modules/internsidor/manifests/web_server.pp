@@ -68,7 +68,7 @@ class internsidor::web_server {
   }
 
   # Redirect requests to old domain to new location
-  nginx::resource::server { $legacy::spexflix_domain:
+  nginx::resource::server { "spexflix.${::organization_domain}":
     maintenance       => true,
     maintenance_value => "return 301 $scheme://${internsidor::domain}/spexflix$request_uri",
   }
