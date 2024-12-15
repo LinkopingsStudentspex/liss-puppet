@@ -67,6 +67,17 @@ class internsidor::web_server {
     ssl_only       => true,
   }
 
+  nginx::resource::location{'/uploads/':
+    # Use Django for checking if the user is authenticated before serving media
+    auth_request   => "/auth_check",
+    location_alias => "${internsidor::media_files_path}/",
+    server         => $internsidor::domain,
+    index_files    =>  [],
+    ssl            => true,
+    ssl_only       => true,
+    require        => Service['internsidor-gunicorn'],
+  }
+
   # Redirect requests to old domain to new location
   nginx::resource::server { "spexflix.${::organization_domain}":
     maintenance       => true,
