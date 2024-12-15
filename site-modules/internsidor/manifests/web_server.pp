@@ -82,5 +82,9 @@ class internsidor::web_server {
   nginx::resource::server { $internsidor::spexflix_domain:
     maintenance       => true,
     maintenance_value => "return 301 \$scheme://${internsidor::domain}/spexflix\$request_uri",
+    ssl_redirect     => true,
+    ssl              => true,
+    ssl_cert         => '/etc/letsencrypt/live/all-sites/fullchain.pem',
+    ssl_key          => '/etc/letsencrypt/live/all-sites/privkey.pem',
   }
 }
