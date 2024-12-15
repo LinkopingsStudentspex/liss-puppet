@@ -5,6 +5,7 @@ class base::certificates {
     domains              => [
       lookup('keycloak_liss::domain'),
       lookup('internsidor::domain'),
+      lookup('internsidor::spexflix_domain'), # To allow redirecting from old spexflix URL
       lookup('mediawiki::domain'),
     ],
     manage_cron          => true,

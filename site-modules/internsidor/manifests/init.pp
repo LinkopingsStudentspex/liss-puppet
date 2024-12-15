@@ -19,6 +19,7 @@ class internsidor (
   $gsuite_auth_email     = '',
   $gsuite_account_file   = '/var/lib/internsidor/credentials.json',
   $gsuite_domain         = $::organization_domain,
+  $spexflix_domain       = undef,
 ) {
   include nginx
   include postgresql::server
