@@ -154,6 +154,7 @@ wfLoadExtension( 'WikiEditor' );
 wfLoadExtension( 'PluggableAuth' );
 wfLoadExtension( 'OpenIDConnect' );
 wfLoadExtension( 'UserMerge' );
+wfLoadExtension( 'ParserFunctions' );
 
 $wgOpenIDConnect_Config['<%= $::keycloak_auth_url %>/realms/liss'] = [
 	'clientID' => '<%= $mediawiki::oidc_clientid %>', 
