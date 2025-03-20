@@ -19,7 +19,6 @@ class internsidor (
   $gsuite_account_file   = '/var/lib/internsidor/credentials.json',
   $gsuite_domain         = $::organization_domain,
 ) {
-  include nginx
   include postgresql::server
   include postfix
   include base::certificates
@@ -27,6 +26,10 @@ class internsidor (
   contain internsidor::milter
   contain internsidor::recipient_lookup
   contain internsidor::web_server
+
+  class { 'nginx':
+    client_max_body_size => '100m',
+  }
 
   keycloak_client { $oidc_clientid:
     realm                 => 'liss',
