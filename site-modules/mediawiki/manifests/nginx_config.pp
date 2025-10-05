@@ -1,7 +1,7 @@
 # Configures nginx to serve mediawiki
 class mediawiki::nginx_config {
-  include php
-  include php::fpm
+  # include php
+  # include php::fpm
 
   nginx::resource::server { $mediawiki::domain:
     autoindex            => 'off',

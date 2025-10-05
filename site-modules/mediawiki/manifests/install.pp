@@ -89,26 +89,26 @@ class mediawiki::install {
     require => File['/var/www/mediawiki'],
   }
 
-  package {[
-    'php',
-    'php-apcu',
-    'php-curl',
-    'php-fpm',
-    'php-intl',
-    'php-mbstring',
-    'php-xml',
-    'php-mysql',
-    'python3-pymysql',
-    'imagemagick',
-  ]:
-  }
+  # package {[
+  #   'php',
+  #   'php-apcu',
+  #   'php-curl',
+  #   'php-fpm',
+  #   'php-intl',
+  #   'php-mbstring',
+  #   'php-xml',
+  #   'php-mysql',
+  #   'python3-pymysql',
+  #   'imagemagick',
+  # ]:
+  # }
 
   exec {'mediawiki_install_script':
     command => "php install.php --dbname ${mediawiki::wiki_db_name} --dbuser ${mediawiki::wiki_db_user} --dbpass \"${mediawiki::wiki_db_pass}\" --dbserver ${mediawiki::wiki_db_host} --extensions WikiEditor,Renameuser,PdfHandler,UserMerge,PluggableAuth,OpenIDConnect --lang sv --scriptpath \"\" --pass \"${mediawiki::wiki_admin_pass}\" \"${mediawiki::wiki_title}\" ${mediawiki::wiki_admin_user }",
     cwd     => '/var/www/mediawiki/maintenance',
     creates => '/var/www/mediawiki/LocalSettings.php',
     path    => '/usr/bin',
-    require => Package['php', 'php-mysql'],
+    # require => Package['php', 'php-mysql'],
   }
 
   file {'/var/www/mediawiki/composer.local.json':
@@ -117,8 +117,8 @@ class mediawiki::install {
     notify  => Exec['run composer'],
   }
 
-  include php
-  include php::composer
+  # include php
+  # include php::composer
 
   exec {'run composer':
     command     => 'composer install --no-dev --no-scripts',
@@ -128,6 +128,6 @@ class mediawiki::install {
     group       => 'www-data',
     environment => ['COMPOSER_HOME=/tmp/composer_home'],
     refreshonly => true,
-    require     => Class['php::composer'],
+    # require     => Class['php::composer'],
   }
 }
