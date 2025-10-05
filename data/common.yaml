@@ -6,7 +6,7 @@ nfs_storage_path: forstor.lysator.liu.se:/liss
 
 nginx::server_purge: true
 
-keycloak::version: '9.0.2'
+keycloak::version: '15.0.1'
 keycloak::datasource_driver: postgresql
 keycloak::datasource_dbname: keycloak
 keycloak::datasource_username: keycloak
