@@ -6,7 +6,7 @@ class keycloak_liss (
   $fail2ban_findtime = 600,
   $fail2ban_maxretry = 10,
 ){
-  require keycloak
+  include keycloak
 
   exec {'enable password reset for liss realm':
     command     => '/opt/keycloak/bin/kcadm-wrapper.sh update realms/liss -x -s resetPasswordAllowed=true',

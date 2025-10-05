@@ -1,5 +1,13 @@
 # Installs mediawiki and sets up basic configuration
 class mediawiki::install {
+  $mysql_user_str = "${mediawiki::wiki_db_user}@localhost"
+  # mysql_user { $mysql_user_str:
+  #   ensure   => present,
+  #   password_hash => mysql::password($mediawiki::wiki_db_pass),
+  # }
+
+  file { '/root/db_pass': content =>  $mediawiki::wiki_db_pass }
+
   mysql::db { $mediawiki::wiki_db_name:
     user     => $mediawiki::wiki_db_user,
     password => $mediawiki::wiki_db_pass,

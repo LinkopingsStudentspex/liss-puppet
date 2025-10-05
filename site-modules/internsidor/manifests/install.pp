@@ -10,8 +10,14 @@ class internsidor::install {
   class { 'python':
     version    => '3',
     pip        => present,
-    virtualenv => present,
   }
+
+  ensure_packages([
+    'python3-psycopg2',
+    'libmilter-dev',
+    'libsasl2-modules',
+    'libpq-dev',
+  ])
 
   vcsrepo { $internsidor::project_path:
     ensure   => latest,
@@ -46,8 +52,9 @@ class internsidor::install {
     ],
   }
 
-  python::virtualenv { $internsidor::venv_path:
-    version => '3',
+  python::pyvenv { $internsidor::venv_path:
+    version => 'system',
+    require => Package['python3-dev'],
   }
 
   # Apparently the bundled setuptools version is too old
@@ -59,19 +66,12 @@ class internsidor::install {
     virtualenv   => $internsidor::venv_path,
     pip_provider => pip3,
     require      => [
-      Python::Virtualenv[$internsidor::venv_path],
+      Python::Pyvenv[$internsidor::venv_path],
       Python::Pip['setuptools'],
     ],
     subscribe    => Vcsrepo[$internsidor::project_path],
     forceupdate  => true,
   }
-
-  package {[
-    'python3-psycopg2',
-    'libmilter-dev',
-    'libsasl2-modules',
-    'libpq-dev',
-  ]:}
 
   python::pip {'psycopg2':
     virtualenv => $internsidor::venv_path,

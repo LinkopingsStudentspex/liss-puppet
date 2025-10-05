@@ -103,9 +103,13 @@ unattended_upgrades::verbose: 1
 firewalld::services:
     http:
         ensure: present
+        zone: public
     https:
         ensure: present
+        zone: public
     ssh:
         ensure: present
+        zone: public
     smtp:
         ensure: present
+        zone: public
