@@ -47,32 +47,30 @@ class mediawiki::install {
     require => Dirtree["${install_path}/skins/common/images"],
   }
 
-
-  $archive_name_oidc = 'OpenIDConnect-REL1_34-1db264d.tar.gz'
-  archive {'OpenIDConnect':
-    path         => "/tmp/${archive_name_oidc}",
-    source       => "puppet:///modules/mediawiki/extensions/${archive_name_oidc}",
-    extract      => true,
-    extract_path => "${install_path}/extensions",
-    creates      => "${install_path}/extensions/OpenIDConnect",
+  $mw_version_w_underscore = $mediawiki::version_major_minor.regsubst(/\./, '_')
+  $extensions = ['OpenIDConnect', 'PluggableAuth', 'UserMerge']
+  $mw_extensions_local_dir = '/opt/mediawiki-extensions'
+  vcsrepo { $mw_extensions_local_dir:
+    ensure     => present,
+    revision   => "REL${mw_version_w_underscore}",
+    source     => 'https://github.com/wikimedia/mediawiki-extensions.git',
+    provider   => git,
+    submodules => false,
   }
-
-  $archive_name_pluggableauth = 'PluggableAuth-REL1_34-17fb1ea.tar.gz'
-  archive {'PluggableAuth':
-    path         => "/tmp/${archive_name_pluggableauth}",
-    source       => "puppet:///modules/mediawiki/extensions/${archive_name_pluggableauth}",
-    extract      => true,
-    extract_path => "${install_path}/extensions",
-    creates      => "${install_path}/extensions/PluggableAuth",
-  }
-
-  $archive_name_usermerge = 'UserMerge-REL1_34-3517022.tar.gz'
-  archive {'UserMerge':
-    path         => "/tmp/${archive_name_usermerge}",
-    source       => "puppet:///modules/mediawiki/extensions/${archive_name_usermerge}",
-    extract      => true,
-    extract_path => "${install_path}/extensions",
-    creates      => "${install_path}/extensions/UserMerge",
+  $extensions.each |$extension| {
+    exec { "Fetch extension code for ${extension}":
+      command     => "/usr/bin/git -C ${mw_extensions_local_dir} submodule update --init ${extension}",
+      refreshonly => true,
+      subscribe   => Vcsrepo[$mw_extensions_local_dir];
+    }
+    file { "${install_path}/extensions/${extension}":
+      recurse => true,
+      owner   => 'www-data',
+      group   => 'www-data',
+      source  => "${mw_extensions_local_dir}/${extension}",
+      notify  => Exec['run composer'],
+      require => Exec["Fetch extension code for ${extension}"];
+    }
   }
 
   file {'/var/www/mediawiki':
@@ -120,7 +118,7 @@ class mediawiki::install {
   # include php
   # include php::composer
 
-  exec {'run composer':
+  exec { 'run composer':
     command     => 'composer install --no-dev --no-scripts',
     cwd         => '/var/www/mediawiki',
     path        => '/usr/local/bin:/usr/bin',
