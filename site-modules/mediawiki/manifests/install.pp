@@ -49,29 +49,26 @@ class mediawiki::install {
 
   $extensions = ['OpenIDConnect', 'PluggableAuth', 'UserMerge']
   $mw_extensions_local_dir = '/opt/mediawiki-extensions'
+  $mw_version_w_underscore = $mediawiki::version_major_minor.regsubst(/\./, '_')
 
-  # For some reason they stopped tagging releases after 1.35.
-  if versioncmp($mediawiki::version_major_minor, '1.35') <= 0 {
-    $mw_version_w_underscore = $mediawiki::version_major_minor.regsubst(/\./, '_')
-    $extensions_revision = "REL${mw_version_w_underscore}"
-  } else {
-    $extensions_revision = $mediawiki::version_major_minor ? {
-      '1.39'  => '0f35efe7ffb93658b4547d2646a6a192e02f4ea7',
-      default => fail('Input a fitting https://github.com/wikimedia/mediawiki-extensions revision into the above table.'),
-    }
-  }
   vcsrepo { $mw_extensions_local_dir:
     ensure     => present,
-    revision   => $extensions_revision,
+    revision   => 'master',
     source     => 'https://github.com/wikimedia/mediawiki-extensions.git',
     provider   => git,
     submodules => false,
   }
   $extensions.each |$extension| {
-    exec { "Fetch extension code for ${extension}":
-      command     => "/usr/bin/git -C ${mw_extensions_local_dir} submodule update --init ${extension}",
-      refreshonly => true,
-      subscribe   => Vcsrepo[$mw_extensions_local_dir];
+    exec {
+      "Set correct branch for ${extension}":
+        command     => "/usr/bin/git -C ${mw_extensions_local_dir} submodule set-branch ${mw_version_w_underscore} ${extension} ",
+        refreshonly => true,
+        subscribe   => Vcsrepo[$mw_extensions_local_dir];
+      "Fetch extension code for ${extension}":
+        command     => "/usr/bin/git -C ${mw_extensions_local_dir} submodule update --init ${extension} ",
+        refreshonly => true,
+        require     => Exec["Set correct branch for ${extension}"],
+        subscribe   => Vcsrepo[$mw_extensions_local_dir];
     }
     file { "${install_path}/extensions/${extension}":
       recurse => true,
