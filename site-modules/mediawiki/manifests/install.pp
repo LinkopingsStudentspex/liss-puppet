@@ -47,7 +47,7 @@ class mediawiki::install {
     require => Dirtree["${install_path}/skins/common/images"],
   }
 
-    $extensions = ['OpenIDConnect', 'PluggableAuth', 'UserMerge']
+  $extensions = ['OpenIDConnect', 'PluggableAuth', 'UserMerge']
   $mw_extensions_local_dir = '/opt/mediawiki-extensions'
 
   # For some reason they stopped tagging releases after 1.35.
@@ -116,7 +116,7 @@ class mediawiki::install {
     cwd     => '/var/www/mediawiki/maintenance',
     creates => '/var/www/mediawiki/LocalSettings.php',
     path    => '/usr/bin',
-    require => Package['php', 'php-mysql'],
+    require => [Package['php', 'php-mysql'], File[$extensions.map |$ext| {"${install_path}/extensions/${ext}"}]],
   }
 
   file {'/var/www/mediawiki/composer.local.json':
