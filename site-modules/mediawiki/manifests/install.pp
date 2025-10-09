@@ -116,6 +116,7 @@ class mediawiki::install {
     cwd     => '/var/www/mediawiki/maintenance',
     creates => '/var/www/mediawiki/LocalSettings.php',
     path    => '/usr/bin',
+    unless  => 'mysql wikidb -e ""',
     require => [Package['php', 'php-mysql'], File[$extensions.map |$ext| {"${install_path}/extensions/${ext}"}]],
   }
 
