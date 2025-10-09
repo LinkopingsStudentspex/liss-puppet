@@ -47,12 +47,22 @@ class mediawiki::install {
     require => Dirtree["${install_path}/skins/common/images"],
   }
 
-  $mw_version_w_underscore = $mediawiki::version_major_minor.regsubst(/\./, '_')
-  $extensions = ['OpenIDConnect', 'PluggableAuth', 'UserMerge']
+    $extensions = ['OpenIDConnect', 'PluggableAuth', 'UserMerge']
   $mw_extensions_local_dir = '/opt/mediawiki-extensions'
+
+  # For some reason they stopped tagging releases after 1.35.
+  if versioncmp($mediawiki::version_major_minor, '1.35') <= 0 {
+    $mw_version_w_underscore = $mediawiki::version_major_minor.regsubst(/\./, '_')
+    $extensions_revision = "REL${mw_version_w_underscore}"
+  } else {
+    $extensions_revision = $mediawiki::version_major_minor ? {
+      '1.39'  => '0f35efe7ffb93658b4547d2646a6a192e02f4ea7',
+      default => fail('Input a fitting https://github.com/wikimedia/mediawiki-extensions revision into the above table.'),
+    }
+  }
   vcsrepo { $mw_extensions_local_dir:
     ensure     => present,
-    revision   => "REL${mw_version_w_underscore}",
+    revision   => $extensions_revision,
     source     => 'https://github.com/wikimedia/mediawiki-extensions.git',
     provider   => git,
     submodules => false,
