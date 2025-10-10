@@ -156,10 +156,14 @@ wfLoadExtension( 'OpenIDConnect' );
 wfLoadExtension( 'UserMerge' );
 #wfLoadExtension( 'ParserFunctions' );
 
-$wgOpenIDConnect_Config['<%= $::keycloak_auth_url %>/realms/liss'] = [
-	'clientID' => '<%= $mediawiki::oidc_clientid %>', 
-	'clientsecret' => '<%= $mediawiki::oidc_clientsecret %>',
-	'name' => 'LiSS medlemsinloggning',
+$wgPluggableAuth_Config[] = [
+	'plugin' => 'OpenIDConnect',
+	'data' => [
+		'providerURL' => 'https://konto.studentspex.se/auth/realms/liss/',
+		'clientID' => 'mediawiki',
+		'clientsecret' => '9ba5a74b6974f811ff618434d2d09b1b',
+		'name' => 'LiSS medlemsinloggning',
+	]
 ];
 $wgOpenIDConnect_MigrateUsersByUserName = true;
 $wgOpenIDConnect_MigrateUsersByEmail = true;
