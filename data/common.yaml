@@ -58,8 +58,8 @@ mysql::server::override_options:
 
 mediawiki::domain: wiki.%{organization_domain}
 mediawiki::baseurl: https://%{lookup('mediawiki::domain')}
-mediawiki::version_major_minor: '1.39'
-mediawiki::version_patch: '15'
+mediawiki::version_major_minor: '1.43'
+mediawiki::version_patch: '5'
 
 php::fpm::settings:
     PHP/post_max_size: '100M'

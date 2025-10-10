@@ -149,7 +149,6 @@ wfLoadSkin( 'Vector' );
 # to LocalSettings.php. Check specific extension documentation for more details.
 # The following extensions were automatically enabled:
 wfLoadExtension( 'PdfHandler' );
-wfLoadExtension( 'Renameuser' );
 wfLoadExtension( 'WikiEditor' );
 wfLoadExtension( 'PluggableAuth' );
 wfLoadExtension( 'OpenIDConnect' );
@@ -175,4 +174,3 @@ $wgGroupPermissions['bureaucrat']['usermerge'] = true;
 
 # End of automatically generated settings.
 # Add more configuration options below.
-
