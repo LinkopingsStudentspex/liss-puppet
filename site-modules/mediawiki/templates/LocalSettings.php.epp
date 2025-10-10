@@ -150,6 +150,7 @@ wfLoadSkin( 'Vector' );
 # The following extensions were automatically enabled:
 wfLoadExtension( 'PdfHandler' );
 wfLoadExtension( 'WikiEditor' );
+wfLoadExtension( 'VisualEditor' );
 wfLoadExtension( 'PluggableAuth' );
 wfLoadExtension( 'OpenIDConnect' );
 wfLoadExtension( 'UserMerge' );

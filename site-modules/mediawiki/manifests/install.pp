@@ -47,7 +47,7 @@ class mediawiki::install {
     require => Dirtree["${install_path}/skins/common/images"],
   }
 
-  $extensions = ['OpenIDConnect', 'PluggableAuth', 'UserMerge']
+  $extensions = ['OpenIDConnect', 'PluggableAuth', 'UserMerge', 'VisualEditor']
   $mw_extensions_local_dir = '/opt/mediawiki-extensions'
   $mw_version_w_underscore = $mediawiki::version_major_minor.regsubst(/\./, '_')
 
