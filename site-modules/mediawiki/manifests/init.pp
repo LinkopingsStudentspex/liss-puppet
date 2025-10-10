@@ -31,6 +31,8 @@ class mediawiki (
 
   file {'/var/www/mediawiki/LocalSettings.php':
     ensure  => file,
+    owner   => 'www-data',
+    group   => 'www-data',
     content => epp('mediawiki/LocalSettings.php.epp'),
     require => Exec['mediawiki_install_script'],
   }
