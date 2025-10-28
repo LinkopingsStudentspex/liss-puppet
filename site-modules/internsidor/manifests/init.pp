@@ -21,7 +21,6 @@ class internsidor (
   $gsuite_domain         = $::organization_domain,
   $spexflix_domain       = undef,
 ) {
-  include nginx
   include postgresql::server
   include postfix
   include base::certificates
@@ -29,6 +28,10 @@ class internsidor (
   contain internsidor::milter
   contain internsidor::recipient_lookup
   contain internsidor::web_server
+
+  class { 'nginx':
+    client_max_body_size => '100m',
+  }
 
   keycloak_client { $oidc_clientid:
     realm                 => 'liss',
