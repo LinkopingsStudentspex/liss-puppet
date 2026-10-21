@@ -94,18 +94,25 @@ class mediawiki::install {
     require => File['/var/www/mediawiki'],
   }
 
-  package {[
-    'php',
-    'php-apcu',
-    'php-curl',
-    'php-fpm',
-    'php-intl',
-    'php-mbstring',
-    'php-xml',
-    'php-mysql',
+package {[
+    'php8.3-apcu',
+    'php8.3-curl',
+    'php8.3-intl',
+    'php8.3-mbstring',
+    'php8.3-xml',
+    'php8.3-mysql',
+    'php8.3-opcache',
+    'php8.3-readline',
     'python3-pymysql',
     'imagemagick',
   ]:
+  }
+
+  package {[
+    'php', 'php-fpm', 'php-apcu', 'php-curl', 'php-intl',
+    'php-mbstring', 'php-xml', 'php-mysql',
+  ]:
+    ensure => absent,
   }
 
   exec {'mediawiki_install_script':
