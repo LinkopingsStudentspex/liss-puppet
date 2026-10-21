@@ -5,6 +5,10 @@ keycloak_auth_url: https://%{lookup('keycloak_liss::domain')}/auth
 nfs_storage_path: forstor.lysator.liu.se:/liss
 
 nginx::server_purge: true
+nginx::nginx_servers:
+  'wiki.studentspex.se':
+    auth_basic: 'Temporarily restricted - security update pending'
+    auth_basic_user_file: '/etc/nginx/.wiki-htpasswd'
 
 keycloak::version: '15.0.1'
 keycloak::datasource_driver: postgresql
